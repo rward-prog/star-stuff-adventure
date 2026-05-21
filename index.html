@@ -492,10 +492,56 @@ body::after {
   margin: 0 auto;
 }
 
+/* ===== REAL PHOTO STRIP ===== */
+.real-strip {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  margin-top: 24px;
+  padding-top: 20px;
+}
+.real-strip-img {
+  width: 150px;
+  height: 95px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+.real-strip-body { flex: 1; min-width: 0; }
+.real-strip-eyebrow {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--nebula-cyan);
+  margin-bottom: 5px;
+}
+.real-strip-caption {
+  font-size: 0.83rem;
+  color: var(--cream);
+  line-height: 1.55;
+  margin-bottom: 8px;
+  font-family: 'Lora', serif;
+}
+.real-strip-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.78rem;
+  color: var(--gold);
+  text-decoration: none;
+  font-family: 'Cinzel', serif;
+}
+.real-strip-link:hover { text-decoration: underline; }
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 600px) {
   .scene-card { margin: 0 8px 16px; padding: 20px 16px 28px; }
   .badge-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+  .real-strip { flex-direction: column; }
+  .real-strip-img { width: 100%; height: 170px; }
 }
 </style>
 </head>
@@ -957,9 +1003,263 @@ const ENDINGS = {
   }
 };
 
+// ===== REAL PHOTO DATA =====
+const REAL_PHOTOS = {
+  START_NEBULA: {
+    image: IMG.pillars,
+    caption: "Pillars of Creation — towering columns of gas and dust in the Eagle Nebula (M16), photographed by the Hubble Space Telescope in 2014. New stars are actively forming inside these pillars right now.",
+    wiki: "https://en.wikipedia.org/wiki/Pillars_of_Creation",
+    wikiLabel: "Pillars of Creation"
+  },
+  PROTOSTAR_SMALL: {
+    image: IMG.protostar_small,
+    caption: "FS Tauri — a real T Tauri protostar system in the Taurus molecular cloud, Hubble Space Telescope. The glowing jets show a star actively being born from a collapsing gas cloud.",
+    wiki: "https://en.wikipedia.org/wiki/T_Tauri_star",
+    wikiLabel: "T Tauri Stars (Young Protostars)"
+  },
+  SUN_LIKE: {
+    image: IMG.sun,
+    caption: "Our Sun — photographed by NASA's Solar Dynamics Observatory in extreme ultraviolet light. This is exactly what you look like as a main-sequence yellow star burning in hydrostatic equilibrium.",
+    wiki: "https://en.wikipedia.org/wiki/Sun",
+    wikiLabel: "The Sun"
+  },
+  FIELD_DAY: {
+    image: IMG.sun,
+    caption: "Our Sun, photographed by NASA's Solar Dynamics Observatory. It has maintained a perfect gravity vs. fusion balance for 4.6 billion years and has about 5 billion years left.",
+    wiki: "https://en.wikipedia.org/wiki/Sun",
+    wikiLabel: "The Sun"
+  },
+  MR_WARD_TELESCOPE: {
+    image: IMG.telescope,
+    caption: "Amateur astronomers observing the night sky. Millions of people worldwide study stars from their own backyards and regularly contribute to real scientific discoveries.",
+    wiki: "https://en.wikipedia.org/wiki/Amateur_astronomy",
+    wikiLabel: "Amateur Astronomy"
+  },
+  RED_GIANT: {
+    image: IMG.betelgeuse,
+    caption: "Betelgeuse — a real red supergiant in Orion, imaged by ALMA. It is so large that if placed where our Sun is, its surface would extend past Jupiter's orbit.",
+    wiki: "https://en.wikipedia.org/wiki/Betelgeuse",
+    wikiLabel: "Betelgeuse"
+  },
+  PLANETARY_NEBULA: {
+    image: IMG.helix,
+    caption: "Helix Nebula (NGC 7293) — the closest planetary nebula to Earth, about 650 light-years away. It is the beautiful remains of a Sun-like star that ran out of fuel.",
+    wiki: "https://en.wikipedia.org/wiki/Helix_Nebula",
+    wikiLabel: "Helix Nebula"
+  },
+  PROTOSTAR_BIG: {
+    image: IMG.protostar_big,
+    caption: "NGC 604 — a giant stellar nursery in the Triangulum Galaxy, imaged by Hubble. This region is simultaneously forming hundreds of massive, high-energy stars.",
+    wiki: "https://en.wikipedia.org/wiki/NGC_604",
+    wikiLabel: "NGC 604 Stellar Nursery"
+  },
+  BLUE_GIANT: {
+    image: IMG.blue_giant,
+    caption: "Rigel — a real blue supergiant about 860 light-years from Earth. It is ~21 times more massive than our Sun and 120,000 times more luminous, burning its fuel at a furious rate.",
+    wiki: "https://en.wikipedia.org/wiki/Rigel",
+    wikiLabel: "Rigel (Blue Supergiant)"
+  },
+  DISK_FORMATION: {
+    image: IMG.hl_tau,
+    caption: "HL Tauri — a real protoplanetary disk only 450 light-years away, photographed by ALMA in 2014. The dark rings are gaps already cleared by forming planets.",
+    wiki: "https://en.wikipedia.org/wiki/HL_Tauri",
+    wikiLabel: "HL Tauri Protoplanetary Disk"
+  },
+  SUPERGIANT_BORN: {
+    image: IMG.eta_carinae,
+    caption: "Eta Carinae — one of the most massive and luminous known stars, 7,500 light-years away, imaged by Hubble. It may explode as a supernova at any time on a cosmic timescale.",
+    wiki: "https://en.wikipedia.org/wiki/Eta_Carinae",
+    wikiLabel: "Eta Carinae"
+  },
+  SUPERGIANT_AGE: {
+    image: IMG.betelgeuse,
+    caption: "Betelgeuse imaged by ALMA — a red supergiant that has already burned through its hydrogen and helium. Scientists think it could go supernova within the next 100,000 years.",
+    wiki: "https://en.wikipedia.org/wiki/Betelgeuse",
+    wikiLabel: "Betelgeuse"
+  },
+  SUPERNOVA: {
+    image: IMG.crab_nebula,
+    caption: "Crab Nebula (M1) — the expanding remains of a supernova explosion witnessed by astronomers on Earth in 1054 AD. It was bright enough to see in daylight for 23 days.",
+    wiki: "https://en.wikipedia.org/wiki/Crab_Nebula",
+    wikiLabel: "Crab Nebula (Supernova Remnant)"
+  },
+  BLACK_HOLE: {
+    image: IMG.black_hole,
+    caption: "M87* — the first black hole ever directly photographed, captured by the Event Horizon Telescope collaboration in 2019. It is 6.5 billion times the mass of the Sun.",
+    wiki: "https://en.wikipedia.org/wiki/Messier_87#Supermassive_black_hole",
+    wikiLabel: "M87* Black Hole"
+  },
+  BINARY_FORM: {
+    image: IMG.binary,
+    caption: "Artist's rendering of a close binary star system. Roughly half of all stars in the Milky Way are in binary or multi-star systems — our lone Sun is actually unusual.",
+    wiki: "https://en.wikipedia.org/wiki/Binary_star",
+    wikiLabel: "Binary Stars"
+  },
+  GALAXY_YEET: {
+    image: IMG.milky_way,
+    caption: "The Milky Way photographed from Cerro Armazones, Chile. Real hypervelocity stars have been detected escaping our galaxy at speeds exceeding 700 km per second.",
+    wiki: "https://en.wikipedia.org/wiki/Hypervelocity_star",
+    wikiLabel: "Hypervelocity Stars"
+  },
+  END_BROWN_DWARF: {
+    image: IMG.brown_dwarf,
+    caption: "Brown dwarf — Hubble Space Telescope illustration, 2024. Brown dwarfs are objects too massive to be planets but too small to ignite the hydrogen fusion that makes a true star.",
+    wiki: "https://en.wikipedia.org/wiki/Brown_dwarf",
+    wikiLabel: "Brown Dwarfs"
+  },
+  END_TOO_HOT: {
+    image: IMG.solar_flare,
+    caption: "A solar flare erupting from our Sun — ESA Solar Orbiter image. Solar flares are violent bursts of magnetic energy that release billions of tons of plasma into space.",
+    wiki: "https://en.wikipedia.org/wiki/Solar_flare",
+    wikiLabel: "Solar Flares"
+  },
+  END_ECLIPSE: {
+    image: IMG.eclipse,
+    caption: "Total solar eclipse of August 11, 1999, photographed over France. The Sun's outer atmosphere (corona) is only visible when the Moon perfectly blocks the solar disk.",
+    wiki: "https://en.wikipedia.org/wiki/Solar_eclipse_of_August_11,_1999",
+    wikiLabel: "Total Solar Eclipses"
+  },
+  END_TELESCOPE_FAN: {
+    image: IMG.telescope_dome,
+    caption: "The ESO Test-Bed Telescope 2 dome at night — one of many professional observatories scanning the sky. Every star being watched right now is a gravity vs. fusion story in progress.",
+    wiki: "https://en.wikipedia.org/wiki/European_Southern_Observatory",
+    wikiLabel: "European Southern Observatory"
+  },
+  END_ATE_EARTH: {
+    image: IMG.eat_earth,
+    caption: "Artist's concept of a star engulfing a planet — based on a real event (ZTF SLRN-2020) observed by astronomers in 2023. It is the first time scientists actually witnessed this happen.",
+    wiki: "https://en.wikipedia.org/wiki/Red_giant",
+    wikiLabel: "Red Giant Stars"
+  },
+  END_WHITE_DWARF: {
+    image: IMG.white_dwarf_art,
+    caption: "Sirius A (bright) and its white dwarf companion Sirius B (tiny dot at lower left) — Hubble Space Telescope. Sirius B is Earth-sized but about as massive as the Sun.",
+    wiki: "https://en.wikipedia.org/wiki/White_dwarf",
+    wikiLabel: "White Dwarfs"
+  },
+  END_REBIRTH: {
+    image: IMG.rebirth,
+    caption: "A star-forming nebula combining Hubble and Spitzer data. Gas clouds like this are seeded with carbon, oxygen, and iron forged inside ancient dead stars — the raw material for everything.",
+    wiki: "https://en.wikipedia.org/wiki/Stellar_nucleosynthesis",
+    wikiLabel: "Stellar Nucleosynthesis"
+  },
+  END_NOVA_FLASH: {
+    image: IMG.nova,
+    caption: "GK Persei — a real nova remnant imaged by Hubble and Chandra in 2015. GK Persei briefly flared to naked-eye visibility in 1901. Its expanding shell is still growing today.",
+    wiki: "https://en.wikipedia.org/wiki/GK_Persei",
+    wikiLabel: "GK Persei (Nova)"
+  },
+  END_ALIEN_LIFE: {
+    image: IMG.exoplanet,
+    caption: "Artist's concept of TRAPPIST-1c — a rocky exoplanet 40 light-years from Earth orbiting an ultra-cool red dwarf. The James Webb Space Telescope studied its atmosphere in 2022.",
+    wiki: "https://en.wikipedia.org/wiki/TRAPPIST-1c",
+    wikiLabel: "TRAPPIST-1c (Exoplanet)"
+  },
+  END_ROAST_PLANET: {
+    image: IMG.hot_planet,
+    caption: "LHS 3844 b — a real exoplanet too close and too hot for life, observed by Spitzer Space Telescope. Its dayside surface temperature exceeds 770°C. No oceans here.",
+    wiki: "https://en.wikipedia.org/wiki/LHS_3844_b",
+    wikiLabel: "LHS 3844 b (Hot Exoplanet)"
+  },
+  END_ATE_PLANET: {
+    image: IMG.blue_giant,
+    caption: "Rigel — a blue supergiant with such intense radiation and gravity that any orbiting material within a certain radius would be vaporized. Tidal disruption events are real and observed.",
+    wiki: "https://en.wikipedia.org/wiki/Tidal_disruption_event",
+    wikiLabel: "Tidal Disruption Events"
+  },
+  END_ATE_BROWN_DWARF: {
+    image: IMG.binary,
+    caption: "Artist's rendering of mass transfer in a close binary system. When two stars orbit close enough, the stronger star's gravity literally pulls gas off its companion's surface.",
+    wiki: "https://en.wikipedia.org/wiki/Mass_transfer_(astronomy)",
+    wikiLabel: "Mass Transfer in Binary Stars"
+  },
+  END_NEUTRON_STAR: {
+    image: IMG.neutron_pulsar,
+    caption: "Crab Pulsar — the neutron star at the core of the Crab Nebula, imaged in X-rays by Chandra. It is the crushed remnant of the 1054 AD supernova and spins 30 times per second.",
+    wiki: "https://en.wikipedia.org/wiki/Crab_Pulsar",
+    wikiLabel: "Crab Pulsar (Neutron Star)"
+  },
+  END_EAT_STAR: {
+    image: IMG.eat_star,
+    caption: "ESA illustration of a black hole repeatedly disrupting a star. Tidal disruption events (TDEs) are detected as sudden bright X-ray flares — astronomers observe several per year.",
+    wiki: "https://en.wikipedia.org/wiki/Tidal_disruption_event",
+    wikiLabel: "Tidal Disruption Events"
+  },
+  END_LONELY_HOLE: {
+    image: IMG.black_hole,
+    caption: "M87* — photographed by the Event Horizon Telescope in 2019. This black hole sits at the center of a galaxy 53 million light-years away, entirely alone at the heart of its empire.",
+    wiki: "https://en.wikipedia.org/wiki/Messier_87",
+    wikiLabel: "Messier 87 Black Hole"
+  },
+  END_BH_MERGER: {
+    image: IMG.ligo_merger,
+    caption: "Artist's illustration of two merging black holes — the scenario that produced gravitational wave event GW150914, detected by LIGO on September 14, 2015. It confirmed Einstein's 1916 prediction.",
+    wiki: "https://en.wikipedia.org/wiki/GW150914",
+    wikiLabel: "GW150914 (First Gravitational Wave Detected)"
+  },
+  END_BINARY_MERGE: {
+    image: IMG.v838,
+    caption: "V838 Monocerotis — a stellar merger photographed by Hubble over several years. The expanding rings are a light echo — light from the explosion reflecting off surrounding dust clouds.",
+    wiki: "https://en.wikipedia.org/wiki/V838_Monocerotis",
+    wikiLabel: "V838 Monocerotis (Stellar Merger)"
+  },
+  END_NEW_GALAXY: {
+    image: IMG.andromeda,
+    caption: "Andromeda Galaxy (M31) — our nearest large galactic neighbor, 2.5 million light-years away. It contains roughly 1 trillion stars and is faintly visible to the naked eye.",
+    wiki: "https://en.wikipedia.org/wiki/Andromeda_Galaxy",
+    wikiLabel: "Andromeda Galaxy"
+  },
+  END_PANCAKE: {
+    image: IMG.asteroid_impact,
+    caption: "NASA/JPL artist's concept of an asteroid collision near star NGC 2547-ID8. High-speed impacts in space create glowing clouds of debris that telescopes can detect years later.",
+    wiki: "https://en.wikipedia.org/wiki/Hypervelocity_star",
+    wikiLabel: "Hypervelocity Stars"
+  },
+  END_WANDERER: {
+    image: IMG.deep_field,
+    caption: "Hubble Ultra Deep Field — nearly 10,000 galaxies captured in a single image. Each smudge is an entire galaxy. The vast empty spaces between them are where wandering stars drift forever.",
+    wiki: "https://en.wikipedia.org/wiki/Hubble_Ultra-Deep_Field",
+    wikiLabel: "Hubble Ultra Deep Field"
+  }
+};
+
 // ===== STATE =====
 let currentNodeId = null;
 let currentView = 'start'; // 'start' | 'node' | 'ending' | 'badges'
+
+// ===== REAL PHOTO STRIP RENDERER =====
+function renderRealStrip(card, id) {
+  const data = REAL_PHOTOS[id];
+  if (!data) return;
+  const strip = document.createElement('div');
+  strip.className = 'real-strip';
+  const img = document.createElement('img');
+  img.src = data.image;
+  img.alt = data.wikiLabel;
+  img.className = 'real-strip-img';
+  img.loading = 'lazy';
+  img.onerror = function() { this.style.display = 'none'; };
+  strip.appendChild(img);
+  const body = document.createElement('div');
+  body.className = 'real-strip-body';
+  const eyebrow = document.createElement('div');
+  eyebrow.className = 'real-strip-eyebrow';
+  eyebrow.textContent = '📷 Real Photo';
+  body.appendChild(eyebrow);
+  const caption = document.createElement('p');
+  caption.className = 'real-strip-caption';
+  caption.textContent = data.caption;
+  body.appendChild(caption);
+  const link = document.createElement('a');
+  link.className = 'real-strip-link';
+  link.href = data.wiki;
+  link.target = '_blank';
+  link.rel = 'noopener noreferrer';
+  link.innerHTML = `→ Wikipedia: ${data.wikiLabel}`;
+  body.appendChild(link);
+  strip.appendChild(body);
+  card.appendChild(strip);
+}
 
 // ===== RENDER ENGINE =====
 function render() {
@@ -1132,6 +1432,9 @@ function renderNode(container, nodeId) {
     card.appendChild(ct);
   }
 
+  // Real photo strip
+  renderRealStrip(card, nodeId);
+
   scene.appendChild(card);
   container.appendChild(scene);
 }
@@ -1188,6 +1491,9 @@ function renderEnding(container, endingId) {
     ct.innerHTML = `🔬 <strong>Concept:</strong> ${ending.concept}`;
     card.appendChild(ct);
   }
+
+  // Real photo strip
+  renderRealStrip(card, endingId);
 
   const actions = document.createElement('div');
   actions.className = 'ending-actions';
