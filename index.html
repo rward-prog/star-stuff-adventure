@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Star Stuff: The Adventure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* ===== CSS VARIABLES ===== */
+:root {
+  --cosmos: #0a0e27;
+  --cosmos-card: #0f1535;
+  --cream: #fdf6e3;
+  --gold: #f4c430;
+  --gold-dim: #c9a020;
+  --nebula-pink: #d946a8;
+  --nebula-cyan: #4ac1e0;
+  --text-muted: #8899bb;
+  --card-border: rgba(244,196,48,0.2);
+  --card-bg: rgba(15,21,53,0.92);
+}
+
+/* ===== RESET ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ===== BODY & STARFIELD ===== */
+body {
+  background: var(--cosmos);
+  color: var(--cream);
+  font-family: 'Lora', Georgia, serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Starfield */
+body::before, body::after {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+body::before {
+  background-image:
+    radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.9) 0%, transparent 100%),
+    radial-gradient(1px 1px at 25% 42%, rgba(255,255,255,0.7) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 38% 8%, rgba(255,255,255,0.8) 0%, transparent 100%),
+    radial-gradient(1px 1px at 52% 30%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 63% 55%, rgba(255,255,255,0.9) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 71% 20%, rgba(255,255,255,0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 82% 70%, rgba(255,255,255,0.8) 0%, transparent 100%),
+    radial-gradient(1px 1px at 90% 35%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 5% 80%, rgba(255,255,255,0.7) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 18% 65%, rgba(255,255,255,0.9) 0%, transparent 100%),
+    radial-gradient(1px 1px at 45% 75%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 57% 88%, rgba(255,255,255,0.8) 0%, transparent 100%),
+    radial-gradient(1px 1px at 76% 90%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 93% 82%, rgba(255,255,255,0.9) 0%, transparent 100%),
+    radial-gradient(1px 1px at 34% 22%, rgba(200,220,255,0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 67% 48%, rgba(200,220,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 12% 95%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 88% 12%, rgba(255,220,150,0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 42% 58%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 79% 44%, rgba(255,255,255,0.6) 0%, transparent 100%);
+  animation: twinkle1 4s ease-in-out infinite alternate;
+}
+body::after {
+  background-image:
+    radial-gradient(1px 1px at 15% 28%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 29% 72%, rgba(255,255,255,0.8) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 44% 45%, rgba(200,220,255,0.9) 0%, transparent 100%),
+    radial-gradient(1px 1px at 58% 18%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 72% 60%, rgba(255,255,255,0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 85% 35%, rgba(255,220,150,0.8) 0%, transparent 100%),
+    radial-gradient(1px 1px at 96% 55%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 8% 48%, rgba(255,255,255,0.9) 0%, transparent 100%),
+    radial-gradient(1px 1px at 22% 85%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 37% 92%, rgba(200,220,255,0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 50% 62%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 65% 78%, rgba(255,255,255,0.8) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 78% 25%, rgba(255,255,255,0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 91% 68%, rgba(255,220,150,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 4% 38%, rgba(255,255,255,0.9) 0%, transparent 100%),
+    radial-gradient(1px 1px at 55% 5%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 83% 96%, rgba(200,220,255,0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 31% 52%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 69% 38%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 47% 82%, rgba(255,255,255,0.8) 0%, transparent 100%);
+  animation: twinkle2 6s ease-in-out infinite alternate;
+}
+@keyframes twinkle1 {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.4; }
+}
+@keyframes twinkle2 {
+  0% { opacity: 0.8; }
+  33% { opacity: 0.3; }
+  66% { opacity: 0.9; }
+  100% { opacity: 0.5; }
+}
+
+/* ===== APP CONTAINER ===== */
+#app {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+/* ===== FADE TRANSITION ===== */
+.scene {
+  animation: fadeIn 400ms ease-in-out;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== HERO IMAGE ===== */
+.hero-image-wrap {
+  width: 100%;
+  height: 42vh;
+  min-height: 220px;
+  max-height: 400px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+.hero-image-wrap::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 60%;
+  background: linear-gradient(to bottom, transparent, var(--cosmos) 90%);
+}
+
+/* ===== SCENE CARD ===== */
+.scene-card {
+  margin: 0 16px 24px;
+  padding: 28px 32px 36px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+}
+
+/* ===== SCENE TITLE ===== */
+.scene-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 700;
+  color: var(--gold);
+  text-align: center;
+  margin-bottom: 24px;
+  text-shadow: 0 0 30px rgba(244,196,48,0.4);
+  line-height: 1.2;
+}
+
+/* ===== STORY TEXT ===== */
+.story-text {
+  font-size: clamp(1rem, 2.2vw, 1.15rem);
+  line-height: 1.8;
+  color: var(--cream);
+  margin-bottom: 16px;
+}
+.story-text strong {
+  color: var(--gold);
+}
+
+/* ===== CHOICES ===== */
+.choices {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.choice-btn {
+  background: transparent;
+  border: 2px solid var(--gold-dim);
+  color: var(--cream);
+  font-family: 'Lora', Georgia, serif;
+  font-size: clamp(0.95rem, 2vw, 1.05rem);
+  padding: 16px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 250ms ease;
+  position: relative;
+  overflow: hidden;
+}
+.choice-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(244,196,48,0.08), transparent);
+  opacity: 0;
+  transition: opacity 250ms ease;
+}
+.choice-btn:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  box-shadow: 0 0 20px rgba(244,196,48,0.25), inset 0 0 20px rgba(244,196,48,0.05);
+  transform: translateX(4px);
+}
+.choice-btn:hover::before { opacity: 1; }
+.choice-btn:active { transform: translateX(2px) scale(0.99); }
+.choice-letter {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--gold-dim);
+  color: var(--cosmos);
+  font-weight: 700;
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  text-align: center;
+  line-height: 28px;
+  margin-right: 12px;
+  flex-shrink: 0;
+  transition: background 250ms ease;
+  vertical-align: middle;
+}
+.choice-btn:hover .choice-letter {
+  background: var(--gold);
+}
+
+/* ===== CONCEPT FOOTER ===== */
+.concept-tag {
+  margin-top: 28px;
+  padding: 10px 16px;
+  background: rgba(74,193,224,0.08);
+  border-left: 3px solid var(--nebula-cyan);
+  border-radius: 0 6px 6px 0;
+  font-size: 0.85rem;
+  color: var(--nebula-cyan);
+  font-style: italic;
+}
+
+/* ===== COUNTER ===== */
+.counter-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px 0;
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+.counter-bar .badge-count {
+  color: var(--gold);
+}
+.badge-wall-link {
+  background: none;
+  border: 1px solid var(--text-muted);
+  color: var(--text-muted);
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+.badge-wall-link:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* ===== ENDING SCREEN ===== */
+.ending-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 28px;
+}
+.btn-primary {
+  background: var(--gold);
+  color: var(--cosmos);
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 16px 32px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 200ms ease;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.btn-primary:hover {
+  background: #ffe066;
+  box-shadow: 0 0 24px rgba(244,196,48,0.5);
+  transform: translateY(-2px);
+}
+.btn-secondary {
+  background: transparent;
+  color: var(--gold);
+  font-family: 'Cinzel', serif;
+  font-size: 0.9rem;
+  padding: 12px 24px;
+  border: 2px solid var(--gold-dim);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+.btn-secondary:hover {
+  border-color: var(--gold);
+  box-shadow: 0 0 16px rgba(244,196,48,0.2);
+}
+
+.ending-badge-unlocked {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+  animation: popIn 500ms cubic-bezier(0.34,1.56,0.64,1) both;
+}
+.ending-badge-unlocked.already-had {
+  animation: none;
+  opacity: 0.6;
+  font-size: 1.8rem;
+}
+@keyframes popIn {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.badge-new-label {
+  text-align: center;
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  margin-bottom: 16px;
+}
+
+/* ===== SUPERNOVA SHAKE ===== */
+@keyframes shake {
+  0%,100% { transform: translate(0,0) rotate(0deg); }
+  10% { transform: translate(-6px,3px) rotate(-1deg); }
+  20% { transform: translate(8px,-4px) rotate(1.5deg); }
+  30% { transform: translate(-5px,6px) rotate(-0.5deg); }
+  40% { transform: translate(7px,-3px) rotate(1deg); }
+  50% { transform: translate(-8px,2px) rotate(-1.5deg); }
+  60% { transform: translate(5px,5px) rotate(0.5deg); }
+  70% { transform: translate(-7px,-2px) rotate(-1deg); }
+  80% { transform: translate(6px,4px) rotate(1deg); }
+  90% { transform: translate(-4px,-5px) rotate(-0.5deg); }
+}
+.shake { animation: shake 600ms ease-in-out; }
+
+/* ===== BADGE WALL ===== */
+.badge-wall-page {
+  padding: 24px 16px;
+}
+.badge-wall-header {
+  font-family: 'Cinzel', serif;
+  text-align: center;
+  margin-bottom: 8px;
+}
+.badge-wall-header h1 {
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  color: var(--gold);
+  text-shadow: 0 0 30px rgba(244,196,48,0.4);
+}
+.badge-wall-header .progress {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin: 8px 0 24px;
+}
+.badge-wall-header .progress span {
+  color: var(--gold);
+  font-weight: 700;
+}
+.badge-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.badge-card {
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--card-bg);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+.badge-card.unlocked:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(244,196,48,0.2);
+}
+.badge-card .badge-img {
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+  display: block;
+}
+.badge-card.locked .badge-img {
+  filter: grayscale(100%) brightness(0.3);
+}
+.badge-card .badge-info {
+  padding: 12px;
+}
+.badge-card .badge-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+  color: var(--gold);
+  font-weight: 600;
+}
+.badge-card.locked .badge-title {
+  color: var(--text-muted);
+}
+.badge-wall-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 40px;
+}
+.btn-danger {
+  background: none;
+  color: #ff6b6b;
+  border: 1px solid rgba(255,107,107,0.4);
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+.btn-danger:hover {
+  background: rgba(255,107,107,0.1);
+  border-color: #ff6b6b;
+}
+
+/* ===== START SCREEN ===== */
+.start-screen {
+  text-align: center;
+  padding: 40px 24px 60px;
+}
+.start-screen .big-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(2rem, 7vw, 4rem);
+  font-weight: 900;
+  color: var(--gold);
+  text-shadow: 0 0 40px rgba(244,196,48,0.5), 0 0 80px rgba(244,196,48,0.2);
+  margin-bottom: 8px;
+  line-height: 1.1;
+}
+.start-screen .subtitle {
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  color: var(--nebula-cyan);
+  font-style: italic;
+  margin-bottom: 40px;
+}
+.start-hero {
+  width: 100%;
+  max-height: 320px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 32px;
+  border: 1px solid var(--card-border);
+}
+.start-intro {
+  max-width: 600px;
+  margin: 0 auto 36px;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--cream);
+  background: var(--card-bg);
+  padding: 24px 28px;
+  border-radius: 10px;
+  border: 1px solid var(--card-border);
+  text-align: left;
+}
+.start-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  .scene-card { margin: 0 8px 16px; padding: 20px 16px 28px; }
+  .badge-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+// ===== STORAGE =====
+const STORAGE_KEY = 'starAdventure_badges';
+
+function getBadges() {
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  } catch { return []; }
+}
+
+function addBadge(id) {
+  const badges = getBadges();
+  if (!badges.includes(id)) {
+    badges.push(id);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(badges));
+    return true; // newly unlocked
+  }
+  return false;
+}
+
+function clearBadges() {
+  localStorage.removeItem(STORAGE_KEY);
+}
+
+// ===== IMAGE URLS =====
+// All URLs verified via Wikimedia Commons API or direct HEAD request
+const IMG = {
+  // Scene images
+  pillars:         'https://upload.wikimedia.org/wikipedia/commons/6/68/Pillars_of_creation_2014_HST_WFC3-UVIS_full-res_denoised.jpg',
+  protostar_small: 'https://upload.wikimedia.org/wikipedia/commons/d/d2/FS_Tau.jpg',
+  sun:             'https://upload.wikimedia.org/wikipedia/commons/b/b4/The_Sun_by_the_Atmospheric_Imaging_Assembly_of_NASA%27s_Solar_Dynamics_Observatory_-_20100819.jpg',
+  telescope:       'https://upload.wikimedia.org/wikipedia/commons/7/72/Amateur_astronomers_and_telescopes.jpg',
+  betelgeuse:      'https://upload.wikimedia.org/wikipedia/commons/5/57/Betelgeuse_captured_by_ALMA.jpg',
+  helix:           'https://upload.wikimedia.org/wikipedia/commons/c/c5/The_Helix_Nebula.jpg',
+  protostar_big:   'https://upload.wikimedia.org/wikipedia/commons/4/44/Grand_Stellar_Nursery_NGC_604_%2832866960148%29.png',
+  blue_giant:      'https://upload.wikimedia.org/wikipedia/commons/d/dd/Rigel_blue_supergiant.jpg',
+  hl_tau:          'https://upload.wikimedia.org/wikipedia/commons/9/9d/HL_Tau_protoplanetary_disk.jpg',
+  eta_carinae:     'https://upload.wikimedia.org/wikipedia/commons/0/0c/Eta_Carinae_%28captured_by_the_Hubble_Space_Telescope%29.jpg',
+  crab_nebula:     'https://upload.wikimedia.org/wikipedia/commons/0/00/Crab_Nebula.jpg',
+  black_hole:      'https://upload.wikimedia.org/wikipedia/commons/4/4f/Black_hole_-_Messier_87_crop_max_res.jpg',
+  binary:          'https://upload.wikimedia.org/wikipedia/commons/2/28/Artist%27s_interpretation_of_a_close_binary_star_system_%28geminiann18004a%29.jpg',
+  milky_way:       'https://upload.wikimedia.org/wikipedia/commons/3/3e/Milky_Way_viewed_from_Cerro_Armazones%2C_Chile_%282019%29.jpg',
+  orion:           'https://upload.wikimedia.org/wikipedia/commons/f/f3/Orion_Nebula_-_Hubble_2006_mosaic_18000.jpg',
+  // Ending-specific images
+  brown_dwarf:     'https://upload.wikimedia.org/wikipedia/commons/3/3c/Hubble_Brown_Dwarf_Survey_Illustration_%282024-005%29.jpg',
+  solar_flare:     'https://upload.wikimedia.org/wikipedia/commons/7/76/Unleashing_a_solar_flare_ESA517026.png',
+  eclipse:         'https://upload.wikimedia.org/wikipedia/commons/c/c7/Solar_eclipse_1999_4.jpg',
+  telescope_dome:  'https://upload.wikimedia.org/wikipedia/commons/5/57/The_Test-Bed_Telescope_2_dome_at_night_%28eso2107h%29.jpg',
+  eat_earth:       'https://upload.wikimedia.org/wikipedia/commons/5/55/Infographic_of_Star_Engulfing_a_Planet_%28noirlab2311b%29.jpg',
+  white_dwarf_art: 'https://upload.wikimedia.org/wikipedia/commons/c/c9/Sirius_A_and_B_artwork.jpg',
+  rebirth:         'https://upload.wikimedia.org/wikipedia/commons/d/d1/Spitzer_and_Hubble_Create_Colorful_Masterpiece_%282006-01-1834%29.jpg',
+  nova:            'https://upload.wikimedia.org/wikipedia/commons/1/11/GKPersei-MiniSuperNova-20150316.jpg',
+  exoplanet:       'https://upload.wikimedia.org/wikipedia/commons/a/a0/Rocky_Exoplanet_TRAPPIST-1_c_%28Artist_Concept%29.jpg',
+  hot_planet:      'https://upload.wikimedia.org/wikipedia/commons/e/e0/PIA23130-Exoplanet-LHS3844b-ArtistConcept-20190819.jpg',
+  neutron_pulsar:  'https://upload.wikimedia.org/wikipedia/commons/a/af/Crab_Nebula_pulsar_x-ray.jpg',
+  eat_star:        'https://upload.wikimedia.org/wikipedia/commons/6/64/A_black_hole_eating_a_star_again_and_again_ESA24674106.png',
+  ligo_merger:     'https://upload.wikimedia.org/wikipedia/commons/a/ae/Artist_NSIllustration_CREDIT_NSF_LIGO_Sonoma_State_University_A._Simonnet.jpg',
+  v838:            'https://upload.wikimedia.org/wikipedia/commons/c/c2/V838_Monocerotis_%283867%29.jpg',
+  andromeda:       'https://upload.wikimedia.org/wikipedia/commons/9/98/Andromeda_Galaxy_%28with_h-alpha%29.jpg',
+  asteroid_impact: 'https://upload.wikimedia.org/wikipedia/commons/0/03/PIA18469-AsteroidCollision-NearStarNGC2547-ID8-2013.jpg',
+  deep_field:      'https://upload.wikimedia.org/wikipedia/commons/2/2f/Hubble_ultra_deep_field.jpg',
+};
+
+// ===== STORY DATA =====
+const NODES = {
+  START_NEBULA: {
+    title: "A Speck in the Cloud",
+    image: IMG.pillars,
+    concept: "Gravity: the force that pulls everything together",
+    text: [
+      "You are a tiny puff of hydrogen gas floating in a cloud so enormous it makes the entire solar system look like a marble. It's dark out here. It's COLD — we're talking minus 270 degrees Celsius, which is basically <strong>as cold as the universe gets</strong>. Nothing has happened in this neighborhood for about a billion years.",
+      "But something just changed. <strong>Gravity</strong> — the same force that keeps you from flying off your chair right now — is reaching across the cloud and whispering to every atom: <em>come closer</em>. Very, very slowly, you're all drifting together. A tiny clump. Then a bigger clump. If enough gas piles up, something absolutely wild could happen.",
+      "What do you do?"
+    ],
+    choices: [
+      { label: "Pull in a TON of gas — get HUGE", next: "PROTOSTAR_BIG" },
+      { label: "Stay small. Just barely clump.", next: "PROTOSTAR_SMALL" },
+      { label: "Smash into a passing clump and form a pair", next: "BINARY_FORM" }
+    ]
+  },
+
+  PROTOSTAR_SMALL: {
+    title: "The Slow Squeeze",
+    image: IMG.protostar_small,
+    concept: "Gravity vs. Fusion: the squeeze begins",
+    text: [
+      "You're warming up. Slowly. <strong>Gravity</strong> is crushing your gas atoms tighter and tighter. To become a real star, your center has to reach <strong>10 million degrees</strong> so hydrogen atoms can SLAM together and fuse.",
+      "You're at 9 million degrees... almost there... The <strong>gravity vs. fusion</strong> tug-of-war is about to begin."
+    ],
+    choices: [
+      { label: "Just barely scrape the line — fusion IGNITES!", next: "SUN_LIKE" },
+      { label: "Don't quite make it. Gravity wins, but no fusion.", next: "END_BROWN_DWARF" },
+      { label: "Eat one more cloud of gas for the road.", next: "SUN_LIKE" }
+    ]
+  },
+
+  SUN_LIKE: {
+    title: "A Quiet Yellow Star",
+    image: IMG.sun,
+    concept: "Hydrostatic Equilibrium: gravity vs. fusion perfectly balanced",
+    text: [
+      "You did it! You're a star! You glow steady yellow, like our Sun. Inside your core, <strong>gravity pulls in</strong> with insane force. <strong>Fusion pushes out</strong> with equal force. Perfectly balanced. You will burn quietly like this for the next <strong>10 BILLION years</strong>.",
+      "A planet forms in orbit around you. Then another. One of them has water. One has a science teacher."
+    ],
+    choices: [
+      { label: "Be the Sun over a Collegiate field day", next: "FIELD_DAY" },
+      { label: "A teacher named Mr. Ward points his telescope at you", next: "MR_WARD_TELESCOPE" },
+      { label: "Skip ahead — feel yourself starting to swell", next: "RED_GIANT" }
+    ]
+  },
+
+  FIELD_DAY: {
+    title: "Field Day at Collegiate",
+    image: IMG.sun,
+    concept: "Main Sequence: billions of years of steady fusion",
+    text: [
+      "You shine down on Collegiate School in NYC. The 5th graders are playing soccer. Mr. Ward is trying to organize them. One kid is using a magnifying glass on an ant. Another kid yells \"MY EYES\" because he looked right at you.",
+      "Don't look directly at stars, kid.",
+      "You've been doing <strong>gravity vs. fusion</strong> so steadily for so long that every life on this planet depends on you. No pressure."
+    ],
+    choices: [
+      { label: "Crank the heat WAY up", next: "END_TOO_HOT" },
+      { label: "Let the Moon slide in front of you (ECLIPSE!)", next: "END_ECLIPSE" },
+      { label: "Keep glowing peacefully — eventually grow old", next: "RED_GIANT" }
+    ]
+  },
+
+  MR_WARD_TELESCOPE: {
+    title: "The Bearded Observer",
+    image: IMG.telescope,
+    concept: "Stellar Observation: how we learn about stars",
+    text: [
+      "A man with a beard is squinting at you through a backyard telescope. He's sipping coffee at 11pm. His kids are yelling that dinner is cold. He's ignoring them. He keeps muttering, <em>\"Fascinating. Fascinating.\"</em>",
+      "It's Mr. Ward. He's been staring at you for two hours. You appreciate the attention."
+    ],
+    choices: [
+      { label: "Shine extra-bright so he can see your sunspots", next: "END_TELESCOPE_FAN" },
+      { label: "Hide behind a cloud (rude!)", next: "SUN_LIKE" },
+      { label: "Age into a red giant right in front of him", next: "RED_GIANT" }
+    ]
+  },
+
+  RED_GIANT: {
+    title: "The Big Puff-Up",
+    image: IMG.betelgeuse,
+    concept: "Red Giant Phase: when hydrogen runs out, gravity starts winning",
+    text: [
+      "Your hydrogen fuel is running out. Without <strong>fusion pushing out</strong>, <strong>gravity starts to win</strong>. Your core shrinks and gets hotter — hot enough to start fusing HELIUM.",
+      "The energy makes your outer layers PUFF OUTWARD. You're now 100 times bigger than before. You swallow Mercury. Then Venus. Earth is getting very warm..."
+    ],
+    choices: [
+      { label: "Eat Earth (sorry, Mr. Ward)", next: "END_ATE_EARTH" },
+      { label: "Gently puff your outer layers off into space", next: "PLANETARY_NEBULA" },
+      { label: "Try one last burst of fusion", next: "PLANETARY_NEBULA" }
+    ]
+  },
+
+  PLANETARY_NEBULA: {
+    title: "The Beautiful Goodbye",
+    image: IMG.helix,
+    concept: "Planetary Nebula: low-mass stars die quietly and beautifully",
+    text: [
+      "Your outer layers drift away in glowing rings — pink, blue, green, gold. From a billion miles away, you look like a giant cosmic eye staring into the universe.",
+      "What's left of you is a tiny, white-hot core, about the size of Earth. The <strong>gravity vs. fusion</strong> battle is almost over — and for you, it ends peacefully."
+    ],
+    choices: [
+      { label: "Slowly cool into a white dwarf", next: "END_WHITE_DWARF" },
+      { label: "Your gas joins a new nebula — a new star will be born from you", next: "END_REBIRTH" },
+      { label: "One last FLASH of brightness", next: "END_NOVA_FLASH" }
+    ]
+  },
+
+  PROTOSTAR_BIG: {
+    title: "Crushing Pressure",
+    image: IMG.protostar_big,
+    concept: "Stellar Mass: more mass = more gravity = hotter core",
+    text: [
+      "You ate SO MUCH gas. You're already 20 times the mass of the Sun and you're not even a star yet! Your core is being <strong>CRUSHED</strong>. Gravity is winning.",
+      "Temperature: 15 million degrees. Then 20. Then 30. The atoms can't take it anymore. The <strong>gravity vs. fusion</strong> battle is about to be EPIC."
+    ],
+    choices: [
+      { label: "IGNITE — full hydrogen fusion, GO!", next: "BLUE_GIANT" },
+      { label: "Spin so fast you fling material into a disk", next: "DISK_FORMATION" },
+      { label: "Keep eating gas — go EVEN bigger", next: "SUPERGIANT_BORN" }
+    ]
+  },
+
+  BLUE_GIANT: {
+    title: "The Blue Beast",
+    image: IMG.blue_giant,
+    concept: "High-Mass Stars: live fast, die young",
+    text: [
+      "You're a blazing blue-white monster, 20 times more massive than the Sun. <strong>Fusion ROARS outward. Gravity CRUSHES inward.</strong> They're balanced — for now.",
+      "But you're burning fuel a <strong>MILLION times faster</strong> than the Sun. You'll only live a few million years. Live fast, die young."
+    ],
+    choices: [
+      { label: "Burn brighter, brighter, brighter", next: "SUPERGIANT_AGE" },
+      { label: "A passing planet wanders too close — snack time", next: "END_ATE_PLANET" },
+      { label: "Another star slingshots you across the galaxy", next: "GALAXY_YEET" }
+    ]
+  },
+
+  DISK_FORMATION: {
+    title: "Building a Solar System",
+    image: IMG.hl_tau,
+    concept: "Protoplanetary Disk: how solar systems are born",
+    text: [
+      "As you spin, your leftover gas flattens into a giant disk around you. Lumps form in the disk. The lumps grow. Wait — those are <strong>PLANETS</strong>.",
+      "One of them has water. One has... aliens? They're looking up at you with their alien telescopes."
+    ],
+    choices: [
+      { label: "Warm the alien planet for billions of years", next: "END_ALIEN_LIFE" },
+      { label: "Burn too hot — roast the planet", next: "END_ROAST_PLANET" },
+      { label: "Settle down. Be a normal star.", next: "SUN_LIKE" }
+    ]
+  },
+
+  SUPERGIANT_BORN: {
+    title: "A Galactic Monster",
+    image: IMG.eta_carinae,
+    concept: "Hypergiant Stars: the most extreme gravity vs. fusion battles in the universe",
+    text: [
+      "You're now 30+ solar masses. You're SO big that if you replaced our Sun, you'd swallow Jupiter. <strong>Gravity</strong> inside you is absolutely insane. <strong>Fusion</strong> is fighting back hard — for now.",
+      "But the most massive stars don't live long. In the <strong>gravity vs. fusion</strong> war, gravity always wins in the end."
+    ],
+    choices: [
+      { label: "Fuse hydrogen → helium → carbon → oxygen → silicon", next: "SUPERGIANT_AGE" },
+      { label: "Eat a passing brown dwarf", next: "END_ATE_BROWN_DWARF" },
+      { label: "Pulse and shake violently", next: "SUPERGIANT_AGE" }
+    ]
+  },
+
+  SUPERGIANT_AGE: {
+    title: "Iron Heart",
+    image: IMG.betelgeuse,
+    concept: "Stellar Evolution: heavy stars race through their fuel",
+    text: [
+      "You're fusing heavier and heavier elements. Each new fuel runs out faster. Hydrogen lasted millions of years. Helium lasted thousands. Silicon lasts <strong>ONE DAY</strong>.",
+      "And then your core becomes <strong>IRON</strong>. Bad news: iron can't fuse. <strong>Fusion stops.</strong> Gravity has nothing to push back against. In the great <strong>gravity vs. fusion</strong> war... <strong>gravity wins.</strong> You collapse."
+    ],
+    choices: [
+      { label: "Core collapses in less than ONE SECOND", next: "SUPERNOVA" },
+      { label: "Try to keep fusing iron (impossible)", next: "SUPERNOVA" },
+      { label: "Shed your outer layers in a final panic", next: "SUPERNOVA" }
+    ]
+  },
+
+  SUPERNOVA: {
+    title: "KABOOM",
+    image: IMG.crab_nebula,
+    concept: "Supernova: the most powerful explosion in the universe",
+    text: [
+      "Your iron core collapses in <strong>less than one second</strong>. One second ago you were the size of the Earth. Now your core is the size of a city. The shockwave that bounces back out is so powerful it rips your entire outer shell apart in the most violent explosion the universe knows how to make.",
+      "For <strong>three weeks</strong>, you shine brighter than the entire Milky Way — all 400 billion stars in it. You can be seen from across the universe. Every atom heavier than iron — the gold in jewelry, the silver in coins, the uranium in nuclear reactors — was <strong>forged right now, in this explosion</strong>. You are literally making the periodic table.",
+      "<strong>Fusion pushed back for millions of years. Gravity won in one second. But what gravity left behind is something extraordinary.</strong> What remains of your core?"
+    ],
+    isSupernova: true,
+    choices: [
+      { label: "Squeezed into a city-sized neutron star", next: "END_NEUTRON_STAR" },
+      { label: "Squeezed even smaller — into a BLACK HOLE", next: "BLACK_HOLE" },
+      { label: "Atoms scatter — feed a new nebula", next: "END_REBIRTH" }
+    ]
+  },
+
+  BLACK_HOLE: {
+    title: "The Final Win for Gravity",
+    image: IMG.black_hole,
+    concept: "Black Holes: when gravity wins completely",
+    text: [
+      "<strong>Gravity has won. Completely. Permanently.</strong> You've been squeezed so small that not even light — the fastest thing in the universe — can escape your pull. You are a black hole: a place where space itself has been crumpled up like a piece of paper.",
+      "There is no more <strong>fusion</strong>. There's no fire, no glow, no warmth. There's only <strong>gravity</strong>, patient and endless, swallowing everything that wanders too close. From the outside, you look like a perfectly round shadow with a glowing ring of doomed gas spiraling in around you.",
+      "You are, honestly, kind of terrifying. And kind of awesome. You're very, very hungry. What do you do?"
+    ],
+    choices: [
+      { label: "Eat a passing star (GULP)", next: "END_EAT_STAR" },
+      { label: "Drift through empty space forever, alone", next: "END_LONELY_HOLE" },
+      { label: "Meet another black hole and MERGE", next: "END_BH_MERGER" }
+    ]
+  },
+
+  BINARY_FORM: {
+    title: "Stellar Dance Partner",
+    image: IMG.binary,
+    concept: "Binary Stars: most stars come in pairs!",
+    text: [
+      "CRASH! You smashed into another protostar. Now you're two stars locked in orbit around each other, doing a slow celestial dance through space.",
+      "Your <strong>gravity</strong> tugs on each other. Your <strong>fusion</strong> lights up the night sky from two directions at once."
+    ],
+    choices: [
+      { label: "Steal mass from your partner — get HUGE", next: "BLUE_GIANT" },
+      { label: "Spiral closer and closer until you merge", next: "END_BINARY_MERGE" },
+      { label: "A third star yeets you out of the system", next: "GALAXY_YEET" }
+    ]
+  },
+
+  GALAXY_YEET: {
+    title: "Hypervelocity Star",
+    image: IMG.milky_way,
+    concept: "Hypervelocity Stars: slingshot by black holes at extreme speeds",
+    text: [
+      "A black hole's <strong>gravity</strong> slingshot you at <strong>1,000 KILOMETERS per second</strong>. You are now a hypervelocity star — moving so fast you'll escape your galaxy forever.",
+      "The Milky Way is shrinking behind you. Inside you, <strong>fusion</strong> still burns. But out here? There's nothing but cold, empty space."
+    ],
+    choices: [
+      { label: "Cross intergalactic space — land in a new galaxy", next: "END_NEW_GALAXY" },
+      { label: "Plow straight through a planet at 1000 km/s", next: "END_PANCAKE" },
+      { label: "Drift forever in the empty dark between galaxies", next: "END_WANDERER" }
+    ]
+  }
+};
+
+// ===== ENDINGS DATA =====
+const ENDINGS = {
+  END_BROWN_DWARF: {
+    title: "The Failed Star",
+    emoji: "🟤",
+    image: IMG.brown_dwarf,
+    concept: "Brown Dwarfs: too small to ignite fusion",
+    text: "You almost made it. <strong>Gravity</strong> squeezed you hard — really hard — but your core never quite hit the magic number: <strong>10 million degrees</strong>, the temperature needed for hydrogen atoms to slam together and fuse. The <strong>gravity vs. fusion</strong> battle... never really started. You'll glow dimly with leftover heat for a trillion years like a cosmic night-light. You're called a <strong>brown dwarf</strong> — not quite a star, not quite a planet. You are the universe's participation trophy."
+  },
+  END_TOO_HOT: {
+    title: "Sunburn Champion",
+    emoji: "🥵",
+    image: IMG.solar_flare,
+    concept: "Solar Energy: too much of a good thing",
+    text: "You cranked up the <strong>fusion</strong>, which cranked up the heat, which cranked up everything. Every 5th grader at Collegiate is now the color of a tomato. The soccer field is on fire. Mr. Ward sends a <em>strongly worded email</em> to the principal, three other science teachers, the PTA newsletter, and NASA. The subject line is: <em>'RE: RE: RE: The Sun Problem.'</em> To be fair, you're just doing what you've always done — <strong>gravity</strong> squeezes in, <strong>fusion</strong> pushes out, and sometimes the balance tips a little hot. You have no regrets."
+  },
+  END_ECLIPSE: {
+    title: "Eclipse Maker",
+    emoji: "🌑",
+    image: IMG.eclipse,
+    concept: "Solar Eclipses: the Moon's shadow covers the Sun",
+    text: "The Moon slid in front of you with millimeter-perfect precision — a cosmic coincidence so unlikely that humans have been flipping out about eclipses for thousands of years. Mr. Ward immediately canceled the math test and turned the whole school into an eclipse party. He handed out cardboard glasses, explained that <strong>gravity</strong> had been choreographing this moment across millions of miles for billions of years, and gave a speech so good that three kids actually started crying. You did that. You're welcome."
+  },
+  END_TELESCOPE_FAN: {
+    title: "Mr. Ward's Favorite",
+    emoji: "⭐",
+    image: IMG.telescope_dome,
+    concept: "Stellar Observation: how astronomers study stars",
+    text: "Mr. Ward stayed up until 2am tracking you through his backyard telescope, completely ignoring the fact that his coffee was cold and his kids were calling him. He photographed you, labeled you in a notebook with a tiny sketch, and gave you an official name: <em>Mittens</em> (after his cat, obviously). He shows the photo to every class he teaches from here on out. Somewhere, 93 million miles away, your <strong>fusion</strong> fires — the same ones you've been running for billions of years — produced the exact photon that hit his lens that night. One photon. One astronomer. One very confused cat."
+  },
+  END_ATE_EARTH: {
+    title: "Earth Eater",
+    emoji: "🌍",
+    image: IMG.eat_earth,
+    concept: "Red Giant Phase: when stars expand and consume their planets",
+    text: "When <strong>fusion</strong> started running low on fuel, <strong>gravity</strong> began to win, your core shrank and heated up, and your outer layers puffed outward like a cosmic balloon. Mercury went first. Then Venus. Then — slowly, inevitably, with absolutely no malice — Earth. Mr. Ward's telescope. Mr. Ward's coffee. Mr. Ward himself. All of it, absorbed into your glowing red atmosphere. You feel a little bad about it. But you also feel 100 times bigger than before. In the <strong>gravity vs. fusion</strong> tug-of-war, this is what happens when the rope starts slipping."
+  },
+  END_WHITE_DWARF: {
+    title: "White Dwarf",
+    emoji: "💎",
+    image: IMG.white_dwarf_art,
+    concept: "White Dwarfs: the quiet retirement of low-mass stars",
+    text: "Your outer layers floated away in glowing clouds, and what's left of you — your hot, dense core — is now the size of Earth but heavier than the Sun once was. There's no more <strong>fusion</strong>. <strong>Gravity</strong> won, but gently, like a game that ended in a handshake. You'll cool down over trillions of years, slowly dimming from white to yellow to red to black. Scientists think the universe isn't old enough yet for any white dwarf to have cooled all the way to black. That means every white dwarf out there is still glowing. Including you."
+  },
+  END_REBIRTH: {
+    title: "The Cycle Continues",
+    emoji: "🔄",
+    image: IMG.rebirth,
+    concept: "Stellar Nucleosynthesis: you ARE made of stardust",
+    text: "You don't really end. Your atoms — the carbon, the oxygen, the iron you spent millions of years fusing in your core — scatter outward into the nebula. That carbon might end up in a tree. That oxygen might end up in someone's lungs. That iron is definitely going to end up in someone's blood. Somewhere in this nebula, <strong>gravity</strong> is already pulling your old atoms toward a new clump, and a new star is beginning its own <strong>gravity vs. fusion</strong> story. You were never just a star. You were a factory. And the factory never really closes."
+  },
+  END_NOVA_FLASH: {
+    title: "Nova Flash",
+    emoji: "✨",
+    image: IMG.nova,
+    concept: "Novae: brief but brilliant stellar explosions",
+    text: "Your outer layers — still held loosely by the last whisper of your <strong>gravity</strong> — lit up in one final, brilliant flash. For a few nights, anyone with a clear sky and a telescope could have spotted you brightening suddenly, then fading. Astronomers call this a <em>nova</em>. <strong>Fusion</strong> had one last, spectacular thing to say before it went quiet. Now you're a white dwarf, roughly the size of Earth, slowly cooling in the dark. You went out with a bang. Not THE bang. But a very respectable bang."
+  },
+  END_ALIEN_LIFE: {
+    title: "Alien Sun",
+    emoji: "👽",
+    image: IMG.exoplanet,
+    concept: "Habitable Zones: the right distance for liquid water and life",
+    text: "Your <strong>fusion</strong>, perfectly balanced against your own <strong>gravity</strong>, hummed along at exactly the right temperature for 4 billion years. Long enough for oceans to form on a nearby planet. Long enough for single-celled blobs to become fish to become land creatures to become something with six legs and three eyes that looks up at the sky and wonders. They named you. The name, roughly translated, sounds like <em>\"Glorp.\"</em> You have become the <em>Glorp</em> of an entire civilization's mythology, science, and poetry. You are someone's Sun. That is the best thing a star can be."
+  },
+  END_ROAST_PLANET: {
+    title: "Crispy Planet",
+    emoji: "🔥",
+    image: IMG.hot_planet,
+    concept: "Habitable Zones: too close and you get roasted",
+    text: "You burned just a little too hot. The planet was orbiting right at the edge of your <strong>habitable zone</strong> — the Goldilocks region where liquid water is possible — but your <strong>fusion</strong> output pushed it over the line. The oceans boiled away. The atmosphere escaped into space. The surface is now hot enough to melt lead. Whatever might have been there — bacteria, beetles, beings with opinions about music — never got the chance. The universe is full of almost-Earths. This was one of them. Oops."
+  },
+  END_ATE_PLANET: {
+    title: "Planet Snacker",
+    emoji: "🪐",
+    image: IMG.blue_giant,
+    concept: "Stellar Gravity: even planets aren't safe near massive stars",
+    text: "One of the planets drifted just a tiny bit too close. Your <strong>gravity</strong> stretched it into a long teardrop shape, then pulled the whole thing apart in a shower of rock and metal. The debris spiraled inward and hit your surface in a brief, brilliant flare. To you, it was barely a hiccup. To a scientist at a university somewhere, staring at her data at 3am, it was the most interesting thing that happened all year. She circled the anomaly with a red pen and started writing a paper. Your <strong>fusion</strong> absorbed an entire planet and didn't even blink."
+  },
+  END_ATE_BROWN_DWARF: {
+    title: "Cosmic Cannibal",
+    emoji: "😈",
+    image: IMG.binary,
+    concept: "Mass Transfer: big stars steal from small ones in binary systems",
+    text: "The brown dwarf never really had a chance. It had enough mass to squeeze and heat its core, but never quite enough to ignite fusion — which meant it had no <strong>fusion fire</strong> pushing back against you when your <strong>gravity</strong> reached out and started pulling its gas away. Layer by layer, you stripped it. Its atoms joined your <strong>fusion</strong> fire. You grew heavier, your core grew hotter, and the <strong>gravity vs. fusion</strong> balance inside you shifted to something new and dangerous. Somewhere in the universe, another brown dwarf quietly decided to orbit a little farther away from everything."
+  },
+  END_NEUTRON_STAR: {
+    title: "Neutron Star",
+    emoji: "💫",
+    image: IMG.neutron_pulsar,
+    concept: "Neutron Stars: when supernova gravity crushes beyond white dwarfs",
+    text: "Your core collapsed beyond a white dwarf, beyond anything ordinary, into something almost impossible: a ball <strong>20 kilometers across</strong> — the size of Manhattan — but heavier than the entire Sun ever was. One teaspoon of you would weigh a billion tons. Your old atoms got squeezed so hard that electrons were forced into protons, creating an entirely new type of particle: <strong>neutrons</strong>. That's why they call you a neutron star. You spin up to <strong>700 times per second</strong>, beaming radiation like a lighthouse. <strong>Gravity</strong> won — but it had to fight past the laws of physics to do it."
+  },
+  END_EAT_STAR: {
+    title: "Star Devourer",
+    emoji: "🌌",
+    image: IMG.eat_star,
+    concept: "Tidal Disruption Events: black holes eating whole stars",
+    text: "A whole star wandered too close. Your <strong>gravity</strong> stretched it out — first into a long ribbon, then into a glowing spiral disk called an <em>accretion disk</em> — swirling faster and faster as it fell toward you. The gas heated up to millions of degrees, glowing brighter than an entire galaxy for a few weeks. Astronomers on the far side of the universe spotted the flash. Then everything disappeared inside your event horizon, never to come out. <strong>Gravity</strong> devoured <strong>fusion</strong> itself. You are larger now. Still hungry. Still waiting."
+  },
+  END_LONELY_HOLE: {
+    title: "The Lonely Void",
+    emoji: "🕳️",
+    image: IMG.black_hole,
+    concept: "Black Hole Evaporation: Hawking radiation slowly drains black holes",
+    text: "You drift through empty intergalactic space for trillions of years. No stars to eat. No gas to swallow. Just the deep, cold quiet between galaxies. Even a black hole gets lonely, it turns out. But here's the wild part: you're not permanent. Physicist Stephen Hawking predicted that black holes slowly leak energy through something called <em>Hawking radiation</em> — pairs of particles that pop into existence right at your edge, with one falling in and one escaping. Over an almost unimaginably long time, you evaporate. Not with a bang. Just... less and less, until you're gone. <strong>Gravity</strong> won everything, and then the universe quietly won it back."
+  },
+  END_BH_MERGER: {
+    title: "Black Hole Smash",
+    emoji: "🌀",
+    image: IMG.ligo_merger,
+    concept: "Gravitational Waves: ripples in spacetime from colliding black holes",
+    text: "You found another black hole and did what black holes do: you circled each other, closer and closer, <strong>gravity</strong> pulling you together, until you merged in a fraction of a second. The collision released more energy than a billion suns — but almost none of it was light or heat. Instead, it rippled through the fabric of spacetime itself, stretching and squeezing space like a wave in a pond, traveling at the speed of light across the universe. A billion years later, a machine in Louisiana called LIGO stretched and squeezed by less than the width of a proton. A scientist named Kip Thorne looked at the data and said something like <em>\"Yes.\"</em> You shook the universe, and the universe heard."
+  },
+  END_BINARY_MERGE: {
+    title: "Stellar Smash",
+    emoji: "💥",
+    image: IMG.v838,
+    concept: "Binary Mergers: when two stars become one massive star",
+    text: "You and your partner had been dancing for millions of years — orbiting each other, your <strong>gravities</strong> intertwined, your <strong>fusions</strong> lighting up the same corner of the galaxy. But gravity always pulls things closer, and closer means faster orbits, and faster orbits mean even closer, and eventually there was nowhere left to go but together. The merger flared across the galaxy like a camera flash. Now you're one star, much more massive than either of you were before. Your core runs hotter. Your <strong>fusion</strong> burns fiercer. The <strong>gravity vs. fusion</strong> war inside you is back on — and it is absolutely not messing around this time."
+  },
+  END_NEW_GALAXY: {
+    title: "Galactic Tourist",
+    emoji: "🌠",
+    image: IMG.andromeda,
+    concept: "Intergalactic Space: the vast emptiness between galaxies",
+    text: "You crossed millions of light-years of emptiness — no stars, no planets, no gas clouds, nothing — just your <strong>fusion</strong> burning alone in the dark. Then, slowly, a new galaxy appeared on the horizon. Different stars. Different colors. A whole new neighborhood. You're the first star from the Milky Way to ever arrive here. Somewhere in this galaxy, there are almost certainly planets. There might be life. There might be someone pointing their version of a telescope at the strange new star that just showed up from nowhere. You are the most well-traveled piece of hydrogen in the history of the universe. You started as a cold cloud. You became a <strong>gravity vs. fusion</strong> engine. And you are still going."
+  },
+  END_PANCAKE: {
+    title: "Cosmic Pancake",
+    emoji: "🥞",
+    image: IMG.asteroid_impact,
+    concept: "Kinetic Energy: a star at 1000 km/s hits very, very hard",
+    text: "You were moving at <strong>1,000 kilometers per second</strong>. That's fast enough to cross the entire United States in under five seconds. The planet had zero warning and approximately zero chance. The collision released energy that made your entire life as a star look like a candle. For a very brief moment, you were the most dramatic thing in this corner of the galaxy. Then there was just a glowing cloud of hot gas expanding in all directions. A scientist somewhere flagged the data as 'anomalous.' She wrote a two-word note to herself: <em>'figure out.'</em> She has not yet figured it out."
+  },
+  END_WANDERER: {
+    title: "Lone Wolf",
+    emoji: "🌑",
+    image: IMG.deep_field,
+    concept: "Intergalactic Space: the loneliest place in the universe",
+    text: "You drifted past the last stars of the Milky Way and kept going. The galaxy shrank to a smudge of light behind you. Then it disappeared. Out here, between galaxies, space is so empty that the nearest star is millions of light-years away. Your <strong>fusion</strong> flickers on — a tiny campfire in an enormous, freezing dark. You have forever to think about the journey: the nebula where it started, the moment <strong>gravity</strong> finally sparked <strong>fusion</strong>, every planet that orbited you, every strange twist in the story. In a few billion years, even your fusion will fade. But right now, in this perfect, silent loneliness, you are still burning. Still warm. Still here."
+  }
+};
+
+// ===== STATE =====
+let currentNodeId = null;
+let currentView = 'start'; // 'start' | 'node' | 'ending' | 'badges'
+
+// ===== RENDER ENGINE =====
+function render() {
+  const app = document.getElementById('app');
+  app.innerHTML = '';
+
+  if (currentView === 'start') {
+    renderStart(app);
+  } else if (currentView === 'node') {
+    renderNode(app, currentNodeId);
+  } else if (currentView === 'ending') {
+    renderEnding(app, currentNodeId);
+  } else if (currentView === 'badges') {
+    renderBadgeWall(app);
+  }
+}
+
+function badgeCountHTML() {
+  const count = getBadges().length;
+  const total = Object.keys(ENDINGS).length;
+  return `<span class="badge-count">${count}</span> / ${total} Endings Found`;
+}
+
+function renderCounterBar(container) {
+  const bar = document.createElement('div');
+  bar.className = 'counter-bar';
+  bar.innerHTML = `<span>${badgeCountHTML()}</span>`;
+  const wallBtn = document.createElement('button');
+  wallBtn.className = 'badge-wall-link';
+  wallBtn.textContent = '🏆 Badge Wall';
+  wallBtn.addEventListener('click', () => { currentView = 'badges'; render(); });
+  bar.appendChild(wallBtn);
+  container.appendChild(bar);
+}
+
+function renderStart(container) {
+  const div = document.createElement('div');
+  div.className = 'scene start-screen';
+
+  const img = document.createElement('img');
+  img.src = IMG.pillars;
+  img.alt = 'Pillars of Creation nebula';
+  img.className = 'start-hero';
+  img.loading = 'lazy';
+  div.appendChild(img);
+
+  const title = document.createElement('h1');
+  title.className = 'big-title';
+  title.textContent = 'Star Stuff';
+  div.appendChild(title);
+
+  const sub = document.createElement('p');
+  sub.className = 'subtitle';
+  sub.textContent = 'The Adventure';
+  div.appendChild(sub);
+
+  const intro = document.createElement('div');
+  intro.className = 'start-intro';
+  intro.innerHTML = `
+    <p>You are a tiny wisp of hydrogen gas. You are about to become a star.</p>
+    <br>
+    <p>Every star is a tug-of-war between <strong>gravity pulling inward</strong> and <strong>fusion pushing outward</strong>. The choices you make will decide your fate — will you live quietly for billions of years, or blaze bright and explode in a supernova?</p>
+    <br>
+    <p style="color:var(--gold); font-style:italic;">There are 20 different endings to discover. How many can you find?</p>
+  `;
+  div.appendChild(intro);
+
+  const buttons = document.createElement('div');
+  buttons.className = 'start-buttons';
+
+  const startBtn = document.createElement('button');
+  startBtn.className = 'btn-primary';
+  startBtn.textContent = '🚀 Begin the Adventure';
+  startBtn.style.width = '100%';
+  startBtn.addEventListener('click', () => {
+    currentNodeId = 'START_NEBULA';
+    currentView = 'node';
+    render();
+  });
+  buttons.appendChild(startBtn);
+
+  const wallBtn = document.createElement('button');
+  wallBtn.className = 'btn-secondary';
+  wallBtn.style.width = '100%';
+  wallBtn.innerHTML = `🏆 Badge Wall (${getBadges().length} / ${Object.keys(ENDINGS).length})`;
+  wallBtn.addEventListener('click', () => { currentView = 'badges'; render(); });
+  buttons.appendChild(wallBtn);
+
+  div.appendChild(buttons);
+  container.appendChild(div);
+}
+
+function renderNode(container, nodeId) {
+  const node = NODES[nodeId];
+  if (!node) { currentNodeId = 'START_NEBULA'; render(); return; }
+
+  renderCounterBar(container);
+
+  const scene = document.createElement('div');
+  scene.className = 'scene';
+
+  // Hero image
+  const heroWrap = document.createElement('div');
+  heroWrap.className = 'hero-image-wrap';
+  const heroImg = document.createElement('img');
+  heroImg.src = node.image;
+  heroImg.alt = node.title;
+  heroImg.loading = 'lazy';
+  heroImg.onerror = function() { this.src = IMG.pillars; };
+  heroWrap.appendChild(heroImg);
+  scene.appendChild(heroWrap);
+
+  // Card
+  const card = document.createElement('div');
+  card.className = 'scene-card';
+  if (node.isSupernova) card.id = 'supernova-card';
+
+  const titleEl = document.createElement('h2');
+  titleEl.className = 'scene-title';
+  titleEl.textContent = node.title;
+  card.appendChild(titleEl);
+
+  node.text.forEach(para => {
+    const p = document.createElement('p');
+    p.className = 'story-text';
+    p.innerHTML = para;
+    card.appendChild(p);
+  });
+
+  // Choices
+  const choicesDiv = document.createElement('div');
+  choicesDiv.className = 'choices';
+  const letters = ['A', 'B', 'C', 'D'];
+  node.choices.forEach((choice, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'choice-btn';
+    btn.innerHTML = `<span class="choice-letter">${letters[i]}</span>${choice.label}`;
+    btn.addEventListener('click', () => {
+      const dest = choice.next;
+      if (NODES[dest]) {
+        currentNodeId = dest;
+        currentView = 'node';
+        if (dest === 'SUPERNOVA') {
+          render();
+          setTimeout(() => {
+            const el = document.getElementById('supernova-card');
+            if (el) el.classList.add('shake');
+          }, 50);
+        } else {
+          render();
+        }
+      } else if (ENDINGS[dest]) {
+        const wasNew = addBadge(dest);
+        currentNodeId = dest;
+        currentView = 'ending';
+        window._justUnlocked = wasNew;
+        render();
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    choicesDiv.appendChild(btn);
+  });
+  card.appendChild(choicesDiv);
+
+  // Concept tag
+  if (node.concept) {
+    const ct = document.createElement('div');
+    ct.className = 'concept-tag';
+    ct.innerHTML = `🔬 <strong>Concept:</strong> ${node.concept}`;
+    card.appendChild(ct);
+  }
+
+  scene.appendChild(card);
+  container.appendChild(scene);
+}
+
+function renderEnding(container, endingId) {
+  const ending = ENDINGS[endingId];
+  if (!ending) { currentView = 'start'; render(); return; }
+
+  renderCounterBar(container);
+
+  const scene = document.createElement('div');
+  scene.className = 'scene';
+
+  // Hero image
+  const heroWrap = document.createElement('div');
+  heroWrap.className = 'hero-image-wrap';
+  const heroImg = document.createElement('img');
+  heroImg.src = ending.image;
+  heroImg.alt = ending.title;
+  heroImg.loading = 'lazy';
+  heroImg.onerror = function() { this.src = IMG.pillars; };
+  heroWrap.appendChild(heroImg);
+  scene.appendChild(heroWrap);
+
+  const card = document.createElement('div');
+  card.className = 'scene-card';
+
+  // Badge animation
+  const badgeDiv = document.createElement('div');
+  badgeDiv.className = window._justUnlocked ? 'ending-badge-unlocked' : 'ending-badge-unlocked already-had';
+  badgeDiv.textContent = ending.emoji;
+  card.appendChild(badgeDiv);
+
+  if (window._justUnlocked) {
+    const newLabel = document.createElement('div');
+    newLabel.className = 'badge-new-label';
+    newLabel.textContent = '✦ ENDING UNLOCKED ✦';
+    card.appendChild(newLabel);
+  }
+
+  const titleEl = document.createElement('h2');
+  titleEl.className = 'scene-title';
+  titleEl.textContent = ending.title;
+  card.appendChild(titleEl);
+
+  const p = document.createElement('p');
+  p.className = 'story-text';
+  p.innerHTML = ending.text;
+  card.appendChild(p);
+
+  if (ending.concept) {
+    const ct = document.createElement('div');
+    ct.className = 'concept-tag';
+    ct.innerHTML = `🔬 <strong>Concept:</strong> ${ending.concept}`;
+    card.appendChild(ct);
+  }
+
+  const actions = document.createElement('div');
+  actions.className = 'ending-actions';
+
+  const restartBtn = document.createElement('button');
+  restartBtn.className = 'btn-primary';
+  restartBtn.textContent = '🚀 Restart Adventure';
+  restartBtn.addEventListener('click', () => {
+    currentNodeId = 'START_NEBULA';
+    currentView = 'node';
+    render();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  actions.appendChild(restartBtn);
+
+  const wallBtn = document.createElement('button');
+  wallBtn.className = 'btn-secondary';
+  wallBtn.innerHTML = `🏆 View Badges (${getBadges().length} / ${Object.keys(ENDINGS).length})`;
+  wallBtn.addEventListener('click', () => { currentView = 'badges'; render(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  actions.appendChild(wallBtn);
+
+  card.appendChild(actions);
+  scene.appendChild(card);
+  container.appendChild(scene);
+}
+
+function renderBadgeWall(container) {
+  const badges = getBadges();
+  const total = Object.keys(ENDINGS).length;
+  const allEndingIds = Object.keys(ENDINGS);
+
+  const page = document.createElement('div');
+  page.className = 'scene badge-wall-page';
+
+  const header = document.createElement('div');
+  header.className = 'badge-wall-header';
+  header.innerHTML = `
+    <h1>Badge Wall</h1>
+    <p class="progress"><span>${badges.length}</span> / ${total} Endings Found</p>
+  `;
+  page.appendChild(header);
+
+  const grid = document.createElement('div');
+  grid.className = 'badge-grid';
+
+  allEndingIds.forEach(id => {
+    const ending = ENDINGS[id];
+    const unlocked = badges.includes(id);
+    const card = document.createElement('div');
+    card.className = `badge-card ${unlocked ? 'unlocked' : 'locked'}`;
+
+    const img = document.createElement('img');
+    img.src = ending.image;
+    img.alt = unlocked ? ending.title : '???';
+    img.className = 'badge-img';
+    img.loading = 'lazy';
+    img.onerror = function() { this.src = IMG.pillars; };
+    card.appendChild(img);
+
+    const info = document.createElement('div');
+    info.className = 'badge-info';
+    const titleEl = document.createElement('div');
+    titleEl.className = 'badge-title';
+    titleEl.textContent = unlocked ? `${ending.emoji} ${ending.title}` : '???';
+    info.appendChild(titleEl);
+    card.appendChild(info);
+
+    if (unlocked) {
+      card.addEventListener('click', () => {
+        window._justUnlocked = false;
+        currentNodeId = id;
+        currentView = 'ending';
+        render();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+      card.style.cursor = 'pointer';
+    }
+
+    grid.appendChild(card);
+  });
+
+  page.appendChild(grid);
+
+  const wallActions = document.createElement('div');
+  wallActions.className = 'badge-wall-actions';
+
+  const adventureBtn = document.createElement('button');
+  adventureBtn.className = 'btn-primary';
+  adventureBtn.textContent = '🚀 Restart Adventure';
+  adventureBtn.addEventListener('click', () => {
+    currentNodeId = 'START_NEBULA';
+    currentView = 'node';
+    render();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  wallActions.appendChild(adventureBtn);
+
+  const homeBtn = document.createElement('button');
+  homeBtn.className = 'btn-secondary';
+  homeBtn.textContent = '🏠 Home Screen';
+  homeBtn.addEventListener('click', () => { currentView = 'start'; render(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  wallActions.appendChild(homeBtn);
+
+  const clearBtn = document.createElement('button');
+  clearBtn.className = 'btn-danger';
+  clearBtn.textContent = 'Clear all badges';
+  clearBtn.addEventListener('click', () => {
+    if (confirm('Clear all your badges and start fresh? This cannot be undone.')) {
+      clearBadges();
+      render();
+    }
+  });
+  wallActions.appendChild(clearBtn);
+
+  page.appendChild(wallActions);
+  container.appendChild(page);
+}
+
+// ===== INITIAL RENDER =====
+render();
+</script>
+</body>
+</html>
