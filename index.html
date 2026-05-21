@@ -492,6 +492,61 @@ body::after {
   margin: 0 auto;
 }
 
+/* ===== QUIZ GATE ===== */
+.quiz-gate { margin-top: 28px; padding: 20px; background: rgba(74,193,224,0.05); border: 1px solid rgba(74,193,224,0.25); border-radius: 10px; }
+.quiz-prompt { font-family: 'Cinzel', serif; font-size: 0.9rem; color: var(--nebula-cyan); margin-bottom: 4px; letter-spacing: 0.05em; }
+.quiz-question { font-size: 1rem; color: var(--cream); font-weight: 600; margin-bottom: 14px; line-height: 1.5; }
+.quiz-options { display: flex; flex-direction: column; gap: 8px; }
+.quiz-opt {
+  background: transparent; border: 1.5px solid rgba(255,255,255,0.15); color: var(--cream);
+  font-family: 'Lora', serif; font-size: 0.9rem; padding: 10px 16px; border-radius: 6px;
+  cursor: pointer; text-align: left; transition: all 150ms ease;
+}
+.quiz-opt:hover { border-color: var(--nebula-cyan); color: var(--nebula-cyan); }
+.quiz-opt.correct { border-color: #4ade80; color: #4ade80; background: rgba(74,222,128,0.1); pointer-events: none; }
+.quiz-opt.wrong { border-color: #f87171; color: #f87171; background: rgba(248,113,113,0.08); pointer-events: none; }
+.quiz-opt.disabled { pointer-events: none; opacity: 0.4; }
+.quiz-feedback { margin-top: 12px; font-size: 0.85rem; padding: 10px 14px; border-radius: 6px; line-height: 1.5; }
+.quiz-feedback.correct { background: rgba(74,222,128,0.1); color: #4ade80; }
+.quiz-feedback.wrong { background: rgba(248,113,113,0.08); color: #f87171; }
+.choices-locked { margin-top: 24px; text-align: center; font-size: 0.82rem; color: var(--text-muted); font-style: italic; padding: 10px; border: 1px dashed rgba(255,255,255,0.1); border-radius: 8px; }
+
+/* ===== GRAVITY / FUSION DIAGRAM ===== */
+.gf-diagram { margin-top: 24px; background: rgba(5,8,20,0.7); border: 1px solid rgba(244,196,48,0.15); border-radius: 12px; padding: 18px 12px 14px; text-align: center; }
+.gf-eyebrow { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px; }
+.gf-label { font-family: 'Cinzel', serif; font-size: 0.78rem; font-weight: 700; margin-top: 10px; letter-spacing: 0.06em; }
+.gf-label.balanced { color: var(--gold); }
+.gf-label.intense { color: var(--nebula-cyan); }
+.gf-label.tipping { color: var(--nebula-pink); }
+.gf-label.won { color: #f87171; }
+
+/* ===== SIZE COMPARISON ===== */
+.size-compare { margin-top: 20px; background: rgba(5,8,20,0.6); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 16px 12px; }
+.size-compare-title { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); text-align: center; margin-bottom: 14px; }
+.size-compare-row { display: flex; align-items: flex-end; justify-content: center; gap: 28px; margin-bottom: 10px; }
+.size-star { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.size-circle { border-radius: 50%; flex-shrink: 0; }
+.size-name { font-family: 'Cinzel', serif; font-size: 0.62rem; text-align: center; letter-spacing: 0.04em; max-width: 70px; line-height: 1.3; }
+.size-mass { font-size: 0.6rem; color: var(--text-muted); text-align: center; }
+
+/* ===== HYDROGEN FUEL GAUGE ===== */
+.fuel-gauge { display:flex;align-items:center;gap:10px;padding:10px 16px;background:rgba(5,8,20,0.5);border:1px solid rgba(255,255,255,0.07);border-radius:8px;margin-bottom:16px; }
+.fuel-icon { font-size:1.1rem; flex-shrink:0; }
+.fuel-label { font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);white-space:nowrap; }
+.fuel-bar-wrap { flex:1;height:10px;background:rgba(255,255,255,0.08);border-radius:5px;overflow:hidden; }
+.fuel-bar-fill { height:100%;border-radius:5px;transition:width 0.4s ease; }
+.fuel-pct { font-family:'Cinzel',serif;font-size:0.72rem;font-weight:700;white-space:nowrap;min-width:36px;text-align:right; }
+
+/* ===== ELEMENT FUSION LADDER ===== */
+.element-ladder { margin-top: 20px; }
+.element-ladder-title { font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px; }
+.element-row { display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 6px; margin-bottom: 5px; font-size: 0.82rem; }
+.element-row.done { background: rgba(74,222,128,0.08); border: 1px solid rgba(74,222,128,0.2); color: #4ade80; }
+.element-row.danger { background: rgba(248,113,113,0.1); border: 1px solid rgba(248,113,113,0.35); color: #f87171; font-weight: 700; }
+.element-symbol { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 700; width: 34px; text-align: center; }
+.element-desc { flex: 1; }
+.element-time { font-size: 0.7rem; color: inherit; opacity: 0.7; text-align: right; white-space: nowrap; }
+
 /* ===== REAL PHOTO STRIP ===== */
 .real-strip {
   display: flex;
@@ -639,8 +694,25 @@ const NODES = {
     ],
     choices: [
       { label: "Just barely scrape the line — fusion IGNITES!", next: "SUN_LIKE" },
-      { label: "Don't quite make it. Gravity wins, but no fusion.", next: "END_BROWN_DWARF" },
+      { label: "Don't quite make it. Still glowing — you're a brown dwarf.", next: "END_BROWN_DWARF" },
+      { label: "Way too small even for a brown dwarf — become a gas giant planet!", next: "GAS_GIANT_FORM" },
       { label: "Eat one more cloud of gas for the road.", next: "SUN_LIKE" }
+    ]
+  },
+
+  GAS_GIANT_FORM: {
+    title: "Almost a Star... Almost",
+    image: IMG.hl_tau,
+    concept: "Gas Giants: what happens when gravity isn't quite strong enough",
+    text: [
+      "You collapsed... but you're nowhere near hot enough for fusion. Your core reached only a few thousand degrees — not 10 million. You're about 300 times the mass of Earth, made almost entirely of hydrogen and helium. Sound familiar?",
+      "A nearby forming star captures you in its gravity. You settle into a wide orbit, becoming that star's largest companion. You're a <strong>gas giant</strong> — basically Jupiter. You have no fusion. <strong>Gravity</strong> squeezed you into a ball, but <strong>fusion never answered back</strong>.",
+      "Moons form around you. One of them might be habitable. A civilization may one day look up at you and name you after one of their gods."
+    ],
+    choices: [
+      { label: "Orbit peacefully — develop spectacular rings and moons", next: "END_GAS_GIANT" },
+      { label: "One of your moons has a liquid ocean underneath its ice", next: "END_GAS_GIANT" },
+      { label: "A small rocky planet nearby looks... habitable", next: "END_GAS_GIANT" }
     ]
   },
 
@@ -693,10 +765,11 @@ const NODES = {
   RED_GIANT: {
     title: "The Big Puff-Up",
     image: IMG.betelgeuse,
-    concept: "Red Giant Phase: when hydrogen runs out, gravity starts winning",
+    concept: "Red Giant Phase: new fusion = new energy = giant puff-out",
     text: [
-      "Your hydrogen fuel is running out. Without <strong>fusion pushing out</strong>, <strong>gravity starts to win</strong>. Your core shrinks and gets hotter — hot enough to start fusing HELIUM.",
-      "The energy makes your outer layers PUFF OUTWARD. You're now 100 times bigger than before. You swallow Mercury. Then Venus. Earth is getting very warm..."
+      "Your hydrogen fuel is almost gone. <strong>Gravity</strong> squeezes your core smaller and smaller until — surprise — it gets hot enough to start fusing <strong>HELIUM</strong>. New fuel! New fusion!",
+      "But here's the wild part: all that <strong>new fusion energy</strong> has to go somewhere. It pushes outward with so much force that your <em>outer layers puff out to 100 times your original size</em>. Every time a new element starts fusing in your core, your outer layers balloon outward. That's why red giants are so huge.",
+      "You swallow Mercury. Then Venus. Earth is next. This is what happens in the <strong>gravity vs. fusion</strong> war when new fuel enters the fight."
     ],
     choices: [
       { label: "Eat Earth (sorry, Mr. Ward)", next: "END_ATE_EARTH" },
@@ -1000,6 +1073,13 @@ const ENDINGS = {
     image: IMG.deep_field,
     concept: "Intergalactic Space: the loneliest place in the universe",
     text: "You drifted past the last stars of the Milky Way and kept going. The galaxy shrank to a smudge of light behind you. Then it disappeared. Out here, between galaxies, space is so empty that the nearest star is millions of light-years away. Your <strong>fusion</strong> flickers on — a tiny campfire in an enormous, freezing dark. You have forever to think about the journey: the nebula where it started, the moment <strong>gravity</strong> finally sparked <strong>fusion</strong>, every planet that orbited you, every strange twist in the story. In a few billion years, even your fusion will fade. But right now, in this perfect, silent loneliness, you are still burning. Still warm. Still here."
+  },
+  END_GAS_GIANT: {
+    title: "The Almost-Star",
+    emoji: "🪐",
+    image: IMG.hl_tau,
+    concept: "Gas Giants: gravity without fusion",
+    text: "You are a gas giant — a world made of hydrogen and helium, just like a star. You have <strong>gravity</strong>. You have mass. You even generate a little heat from being squeezed. But you have no <strong>fusion</strong>. The <strong>gravity vs. fusion</strong> battle never started — gravity won without even trying. You orbit a nearby star and grow enormous rings. Your moons are spectacular. Scientists will one day study you and wonder if anything lives on your frozen, ocean-covered moons. You are basically Jupiter. You are magnificent. You are not a star. You're okay with this."
   }
 };
 
@@ -1100,6 +1180,18 @@ const REAL_PHOTOS = {
     caption: "The Milky Way photographed from Cerro Armazones, Chile. Real hypervelocity stars have been detected escaping our galaxy at speeds exceeding 700 km per second.",
     wiki: "https://en.wikipedia.org/wiki/Hypervelocity_star",
     wikiLabel: "Hypervelocity Stars"
+  },
+  GAS_GIANT_FORM: {
+    image: IMG.hl_tau,
+    caption: "HL Tauri protoplanetary disk — planets form in the rings of gas around new stars. Gas giants like Jupiter form when enough gas clumps together but not enough to ignite fusion.",
+    wiki: "https://en.wikipedia.org/wiki/Gas_giant",
+    wikiLabel: "Gas Giants"
+  },
+  END_GAS_GIANT: {
+    image: IMG.hl_tau,
+    caption: "Protoplanetary disk where gas giants form. Jupiter contains more mass than all other planets in our Solar System combined — yet it never became a star.",
+    wiki: "https://en.wikipedia.org/wiki/Jupiter",
+    wikiLabel: "Jupiter (Gas Giant)"
   },
   END_BROWN_DWARF: {
     image: IMG.brown_dwarf,
@@ -1223,9 +1315,443 @@ const REAL_PHOTOS = {
   }
 };
 
+// ===== HYDROGEN FUEL LEVELS =====
+const H_FUEL = {
+  START_NEBULA:    { pct: 100, label: 'All hydrogen, no fusion yet' },
+  PROTOSTAR_SMALL: { pct: 100, label: 'Full tank — fusion not started' },
+  GAS_GIANT_FORM:  { pct: 100, label: 'Full tank — but no fusion ever' },
+  SUN_LIKE:        { pct:  90, label: 'Just ignited — nearly full' },
+  FIELD_DAY:       { pct:  65, label: 'Mid-life — burning steadily' },
+  MR_WARD_TELESCOPE:{ pct: 58, label: 'Getting there — still plenty left' },
+  RED_GIANT:       { pct:   8, label: 'Nearly empty — gravity winning' },
+  PLANETARY_NEBULA:{ pct:   0, label: 'Hydrogen gone — outer layers leaving' },
+  PROTOSTAR_BIG:   { pct: 100, label: 'Full tank — about to ignite BIG' },
+  BLUE_GIANT:      { pct:  72, label: 'Burning a million times faster than the Sun' },
+  DISK_FORMATION:  { pct:  88, label: 'Newly ignited — mostly full' },
+  SUPERGIANT_BORN: { pct:  60, label: 'Burning furiously' },
+  SUPERGIANT_AGE:  { pct:   0, label: 'Hydrogen GONE — now fusing iron. Uh oh.' },
+  SUPERNOVA:       { pct:   0, label: 'No fuel — gravity wins in 1 second' },
+  BLACK_HOLE:      { pct:   0, label: 'No fusion. No fuel. Only gravity.' },
+  BINARY_FORM:     { pct: 100, label: 'Both stars full — just getting started' },
+  GALAXY_YEET:     { pct:  55, label: 'Fusion still burning as you fly away' },
+};
+
+// ===== QUIZ DATA =====
+const QUIZZES = {
+  START_NEBULA: {
+    q: "What force is slowly pulling your gas atoms together right now?",
+    options: ["Heat from a nearby star", "Gravity", "Fusion energy", "Magnetic fields"],
+    correct: 1, hint: "It's the same force that keeps you in your seat!"
+  },
+  PROTOSTAR_SMALL: {
+    q: "How hot must your core get before hydrogen fusion can ignite?",
+    options: ["1 million degrees", "5 million degrees", "10 million degrees", "1 billion degrees"],
+    correct: 2, hint: "Look for the bolded temperature in the text above!"
+  },
+  SUN_LIKE: {
+    q: "Inside your core right now, which two forces are perfectly balanced?",
+    options: ["Heat and magnetism", "Gravity pulling in and fusion pushing out", "Pressure and vacuum", "Light and electricity"],
+    correct: 1, hint: "This is THE most important concept in the whole story!"
+  },
+  FIELD_DAY: {
+    q: "How long will you burn quietly if you stay in perfect balance?",
+    options: ["100 million years", "1 billion years", "10 billion years", "1 trillion years"],
+    correct: 2, hint: "Check the bold number in the text!"
+  },
+  MR_WARD_TELESCOPE: {
+    q: "How far does your fusion light travel before hitting Mr. Ward's lens?",
+    options: ["1 million miles", "10 million miles", "93 million miles", "930 million miles"],
+    correct: 2, hint: "The number is in the real photo caption below!"
+  },
+  RED_GIANT: {
+    q: "When hydrogen fuel runs out and fusion drops, what happens to your CORE?",
+    options: ["It expands and cools", "It shrinks and gets even hotter", "It stops moving", "It turns into iron"],
+    correct: 1, hint: "Gravity is squeezing harder now with less fusion fighting back — what does squeezing do?"
+  },
+  PLANETARY_NEBULA: {
+    q: "After your outer layers drift away, what are you left with?",
+    options: ["Nothing — you're gone", "A black hole", "A tiny white-hot core about the size of Earth", "A giant red cloud"],
+    correct: 2, hint: "The text tells you exactly what remains!"
+  },
+  PROTOSTAR_BIG: {
+    q: "You've eaten a LOT of gas. How many times more massive than the Sun are you already?",
+    options: ["2 times", "5 times", "10 times", "20 times"],
+    correct: 3, hint: "Look for the number in the text above!"
+  },
+  BLUE_GIANT: {
+    q: "How much faster are you burning fuel compared to our Sun?",
+    options: ["10 times faster", "1,000 times faster", "1 million times faster", "1 billion times faster"],
+    correct: 2, hint: "Look for the bold comparison in the text!"
+  },
+  DISK_FORMATION: {
+    q: "The dark rings in your protoplanetary disk are caused by what?",
+    options: ["Shadows from passing comets", "Areas where gas cooled", "Gaps where planets are already forming", "Magnetic field lines"],
+    correct: 2, hint: "What could clear a gap in a spinning disk of gas and dust?"
+  },
+  SUPERGIANT_BORN: {
+    q: "If you replaced our Sun right now, how far out would you extend?",
+    options: ["To Mercury", "To Earth", "To Mars", "Past Jupiter"],
+    correct: 3, hint: "Check the real photo description of Betelgeuse!"
+  },
+  SUPERGIANT_AGE: {
+    q: "Why does fusion STOP when your core becomes iron?",
+    options: ["Iron is too cold", "Iron absorbs energy instead of releasing it — it's a dead end", "Iron is too light", "You run out of gravity"],
+    correct: 1, hint: "Every other element releases energy when fused. Iron is different — what does it do instead?"
+  },
+  SUPERNOVA: {
+    q: "How long do you outshine the entire Milky Way after you explode?",
+    options: ["One hour", "One day", "Three weeks", "Three years"],
+    correct: 2, hint: "Look for the bold time period in the text!"
+  },
+  BLACK_HOLE: {
+    q: "What happened to all the fusion energy that once burned inside you?",
+    options: ["It's still burning deep inside", "There is no more fusion — gravity has completely won", "It became heat", "It escaped as light"],
+    correct: 1, hint: "Read the very first sentence of this scene."
+  },
+  BINARY_FORM: {
+    q: "How common are binary star systems in the Milky Way?",
+    options: ["Very rare — about 1 in 20 stars", "About 1 in 5 stars", "About half of all stars", "Almost all stars"],
+    correct: 2, hint: "Check the real photo caption at the bottom!"
+  },
+  GALAXY_YEET: {
+    q: "How fast are you traveling as a hypervelocity star?",
+    options: ["100 km/s", "1,000 km/s", "10,000 km/s", "The speed of light"],
+    correct: 1, hint: "Look for the bold speed in the text above!"
+  },
+  GAS_GIANT_FORM: {
+    q: "Why can't you become a star even though you're made of hydrogen?",
+    options: ["You're the wrong color", "You don't have enough mass to heat your core to 10 million degrees", "You have too much iron", "You're spinning too fast"],
+    correct: 1, hint: "What temperature does the core need to reach before fusion can start?"
+  }
+};
+
+// ===== GRAVITY / FUSION STATE DATA =====
+const GRAVITY_STATES = {
+  SUN_LIKE:       { state: 'balanced',       label: 'PERFECTLY BALANCED',                   gIn: 5, fOut: 5 },
+  BLUE_GIANT:     { state: 'intense',        label: 'BALANCED — BUT BURNING A MILLION× FASTER', gIn: 8, fOut: 8 },
+  SUPERGIANT_AGE: { state: 'tipping',        label: 'GRAVITY IS WINNING...',                gIn: 9, fOut: 4 },
+  BLACK_HOLE:     { state: 'won',            label: 'GRAVITY HAS WON — COMPLETELY',         gIn: 10, fOut: 0 },
+  END_WHITE_DWARF:{ state: 'balanced',       label: 'GRAVITY WON — GENTLY',                 gIn: 4, fOut: 0 },
+  END_NEUTRON_STAR:{ state: 'won',           label: 'GRAVITY CRUSHED EVERYTHING',            gIn: 10, fOut: 0 },
+};
+
+// ===== MASS PATH TRACKER =====
+// Remembers which mass path the player chose so we can show a banner
+const MASS_LABELS = {
+  PROTOSTAR_SMALL:  { emoji: '🟡', label: 'Low-Mass Star', desc: 'You chose to stay small — like our Sun or smaller.' },
+  PROTOSTAR_BIG:    { emoji: '🔵', label: 'High-Mass Star', desc: 'You chose to grow massive — 20× the Sun or more.' },
+  BINARY_FORM:      { emoji: '⚡', label: 'Binary Star System', desc: 'You collided and formed a pair of stars.' },
+  SUN_LIKE:         { emoji: '🟡', label: 'Low-Mass Star', desc: 'You stayed small — living billions of years in balance.' },
+  BLUE_GIANT:       { emoji: '🔵', label: 'High-Mass Star', desc: 'You are massive — burning fast, living short.' },
+  SUPERGIANT_BORN:  { emoji: '🔴', label: 'Super High-Mass Star', desc: 'You are enormous — 30+ solar masses. Supernova incoming.' },
+  SUPERGIANT_AGE:   { emoji: '🔴', label: 'Super High-Mass Star', desc: 'You are enormous — 30+ solar masses. Supernova incoming.' },
+  DISK_FORMATION:   { emoji: '🔵', label: 'High-Mass Star', desc: 'You are massive and spinning fast.' },
+  RED_GIANT:        { emoji: '🟡', label: 'Low-Mass Star', desc: 'You lived long and are now aging gracefully.' },
+  PLANETARY_NEBULA: { emoji: '🟡', label: 'Low-Mass Star', desc: 'Low-mass stars die beautifully — no explosion needed.' },
+  FIELD_DAY:        { emoji: '🟡', label: 'Low-Mass Star', desc: 'You are steady, warm, and stable — just like our Sun.' },
+  MR_WARD_TELESCOPE:{ emoji: '🟡', label: 'Low-Mass Star', desc: 'A quiet, long-lived yellow star.' },
+  SUPERNOVA:        { emoji: '🔴', label: 'High-Mass Star → SUPERNOVA', desc: 'Only massive stars explode as supernovas.' },
+  BLACK_HOLE:       { emoji: '⚫', label: 'Black Hole', desc: 'Only the most massive stars end this way.' },
+  GALAXY_YEET:      { emoji: '⚡', label: 'Hypervelocity Star', desc: 'Ejected from a binary or black hole slingshot.' },
+  GAS_GIANT_FORM:   { emoji: '🪐', label: 'Gas Giant Planet', desc: 'Too small for fusion — you became a planet instead.' },
+};
+
 // ===== STATE =====
 let currentNodeId = null;
 let currentView = 'start'; // 'start' | 'node' | 'ending' | 'badges'
+window._quizPassed = {};
+
+// ===== STAR LIFETIME TIMELINES =====
+const TIMELINES = {
+  END_BROWN_DWARF:   { total: 'Trillions of years',  color: '#8b5e3c', steps: [{ label: 'Collapsing nebula', dur: '~1 million years' }, { label: 'Glowing faintly (forever)', dur: 'Trillions of years' }], note: 'Never ignited — no fusion ever happened.' },
+  END_TOO_HOT:       { total: '~10 billion years',   color: '#ffe066', steps: [{ label: 'Protostar', dur: '~50 million years' }, { label: 'Main sequence (fusion!)', dur: '~10 billion years' }], note: 'A Sun-like star — steady for 10 billion years.' },
+  END_ECLIPSE:       { total: '~10 billion years',   color: '#ffe066', steps: [{ label: 'Protostar', dur: '~50 million years' }, { label: 'Main sequence (fusion!)', dur: '~10 billion years' }], note: 'A perfectly ordinary Sun-like star.' },
+  END_TELESCOPE_FAN: { total: '~10 billion years',   color: '#ffe066', steps: [{ label: 'Protostar', dur: '~50 million years' }, { label: 'Main sequence (fusion!)', dur: '~10 billion years' }], note: 'Still burning steadily. Mr. Ward is still watching.' },
+  END_ATE_EARTH:     { total: '~11 billion years',   color: '#ff8c44', steps: [{ label: 'Protostar', dur: '~50 million years' }, { label: 'Main sequence', dur: '~10 billion years' }, { label: 'Red giant (expanding!)', dur: '~1 billion years' }], note: 'Low-mass stars expand gently before dying.' },
+  END_WHITE_DWARF:   { total: '~11 billion years + cooling', color: '#ddeeff', steps: [{ label: 'Protostar', dur: '~50 million years' }, { label: 'Main sequence', dur: '~10 billion years' }, { label: 'Red giant', dur: '~1 billion years' }, { label: 'Planetary nebula → White dwarf', dur: 'Then trillions cooling' }], note: 'The quietest, longest-lived stellar fate.' },
+  END_REBIRTH:       { total: '~11 billion years',   color: '#4ac1e0', steps: [{ label: 'Protostar', dur: '~50 million years' }, { label: 'Main sequence', dur: '~10 billion years' }, { label: 'Red giant / Supernova', dur: '~1 billion years' }, { label: 'Atoms scattered → new stars', dur: 'Eternal cycle' }], note: 'Your atoms will outlive you by billions of years.' },
+  END_NOVA_FLASH:    { total: '~11 billion years',   color: '#ffe066', steps: [{ label: 'Main sequence', dur: '~10 billion years' }, { label: 'Red giant', dur: '~1 billion years' }, { label: 'Nova flash!', dur: 'Days' }, { label: 'White dwarf cooling', dur: 'Trillions of years' }], note: 'One last burst, then eternal quiet.' },
+  END_ALIEN_LIFE:    { total: '~10 billion years',   color: '#4ade80', steps: [{ label: 'Protostar', dur: '~50 million years' }, { label: 'Main sequence (life evolves!)', dur: '~10 billion years' }], note: 'You gave an alien civilization 4 billion years to evolve.' },
+  END_ROAST_PLANET:  { total: '~10 billion years',   color: '#f87171', steps: [{ label: 'Protostar', dur: '~50 million years' }, { label: 'Main sequence (too hot for life)', dur: '~10 billion years' }], note: 'The planet had no chance from day one.' },
+  END_ATE_PLANET:    { total: 'Millions of years',   color: '#8eceff', steps: [{ label: 'Protostar', dur: '~1 million years' }, { label: 'Blue giant main sequence', dur: 'A few million years' }], note: 'High-mass stars burn so fast they only live a few million years.' },
+  END_ATE_BROWN_DWARF:{ total: 'Millions of years',  color: '#8eceff', steps: [{ label: 'Protostar', dur: '~1 million years' }, { label: 'Giant eating a neighbor', dur: 'A few million years' }], note: 'Your enlarged mass just shortened your remaining lifespan.' },
+  END_NEUTRON_STAR:  { total: '~10 million years',   color: '#d946a8', steps: [{ label: 'Protostar', dur: '~100,000 years' }, { label: 'Blue giant main sequence', dur: '~10 million years' }, { label: 'Red supergiant', dur: '~100,000 years' }, { label: 'SUPERNOVA → Neutron star', dur: '<1 second collapse' }], note: 'High-mass stars live fast and die violently.' },
+  END_EAT_STAR:      { total: 'Billions of years (as a black hole)', color: '#888', steps: [{ label: 'Massive star life', dur: '~10 million years' }, { label: 'SUPERNOVA', dur: '< 1 second' }, { label: 'Black hole (eating stars)', dur: 'Billions of years' }], note: 'Black holes outlive everything. Even the galaxy.' },
+  END_LONELY_HOLE:   { total: 'Longer than the universe\'s current age', color: '#555', steps: [{ label: 'Massive star life', dur: '~10 million years' }, { label: 'SUPERNOVA → Black hole', dur: '< 1 second' }, { label: 'Drifting alone', dur: 'Trillions of years' }, { label: 'Evaporating via Hawking radiation', dur: '10⁶⁷ years' }], note: 'The last black holes will outlive the stars by unimaginable timescales.' },
+  END_BH_MERGER:     { total: 'Billions of years', color: '#aaaaff', steps: [{ label: 'Both stars: massive star lives', dur: 'Millions of years each' }, { label: 'Both explode → two black holes', dur: 'Microseconds each' }, { label: 'Spiraling together', dur: 'Billions of years' }, { label: 'MERGER → gravitational waves!', dur: 'Fraction of a second' }], note: 'The merger that made LIGO shake was a billion years in the making.' },
+  END_BINARY_MERGE:  { total: 'Millions of years',  color: '#ff8c66', steps: [{ label: 'Two protostars form', dur: '~1 million years' }, { label: 'Binary orbit slowly tightening', dur: 'Millions of years' }, { label: 'MERGER → supergiant!', dur: 'Seconds' }], note: 'The new merged star will likely end in a supernova.' },
+  END_NEW_GALAXY:    { total: 'Billions of years',  color: '#4ac1e0', steps: [{ label: 'Star life (any path)', dur: 'Millions–billions of years' }, { label: 'Slingshot across intergalactic space', dur: 'Millions of years of travel' }, { label: 'Arrive in new galaxy', dur: 'Still burning!' }], note: 'Your journey across intergalactic space alone took millions of years.' },
+  END_PANCAKE:       { total: 'Milliseconds (at the end)', color: '#f87171', steps: [{ label: 'Star life', dur: 'Millions–billions of years' }, { label: 'Hypervelocity flight', dur: 'Millions of years' }, { label: 'Planet collision at 1000 km/s', dur: 'Milliseconds' }], note: 'A long life ended in an instant.' },
+  END_WANDERER:      { total: 'Effectively forever', color: '#4a5568', steps: [{ label: 'Star life', dur: 'Millions–billions of years' }, { label: 'Hypervelocity flight into intergalactic void', dur: 'Billions of years' }, { label: 'Fusion fades', dur: 'Eventually...' }, { label: 'Cold dark remnant drifting', dur: 'Forever' }], note: 'The most isolated fate in the universe.' },
+  END_GAS_GIANT:     { total: 'Billions of years (orbiting a star)', color: '#8eceff', steps: [{ label: 'Gas cloud collapses — too small for fusion', dur: '~1 million years' }, { label: 'Captured by nearby star', dur: 'Immediate' }, { label: 'Gas giant orbit — no fusion ever', dur: 'Billions of years' }], note: 'Gas giants can outlast many stars. Jupiter will still be here long after our Sun becomes a red giant.' },
+};
+
+function renderTimeline(card, endingId) {
+  const tl = TIMELINES[endingId];
+  if (!tl) return;
+  const wrap = document.createElement('div');
+  wrap.style.cssText = 'margin-top:24px;padding:18px 16px;background:rgba(5,8,20,0.6);border:1px solid rgba(255,255,255,0.08);border-radius:10px;';
+  const eyebrow = document.createElement('div');
+  eyebrow.style.cssText = 'font-family:Cinzel,serif;font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;';
+  eyebrow.textContent = '⏱ Your Star\'s Life Timeline';
+  wrap.appendChild(eyebrow);
+
+  const totalLine = document.createElement('div');
+  totalLine.style.cssText = `font-family:Cinzel,serif;font-size:0.9rem;font-weight:700;color:${tl.color};margin-bottom:14px;`;
+  totalLine.textContent = `Total lifespan: ${tl.total}`;
+  wrap.appendChild(totalLine);
+
+  tl.steps.forEach((step, i) => {
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex;align-items:center;gap:10px;margin-bottom:6px;';
+    const dot = document.createElement('div');
+    dot.style.cssText = `width:10px;height:10px;border-radius:50%;background:${tl.color};flex-shrink:0;opacity:${0.4 + (i / tl.steps.length) * 0.6};`;
+    const line = i < tl.steps.length - 1 ? `<div style="width:2px;height:18px;background:${tl.color};opacity:0.25;margin-left:4px;margin-bottom:2px;"></div>` : '';
+    const stepWrap = document.createElement('div');
+    stepWrap.style.cssText = 'flex:1;';
+    stepWrap.innerHTML = `<span style="font-size:0.82rem;color:var(--cream);">${step.label}</span><br><span style="font-size:0.72rem;color:var(--text-muted);">${step.dur}</span>`;
+    row.appendChild(dot);
+    row.appendChild(stepWrap);
+    wrap.appendChild(row);
+  });
+
+  if (tl.note) {
+    const note = document.createElement('p');
+    note.style.cssText = 'font-size:0.75rem;color:var(--text-muted);font-style:italic;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.06);line-height:1.5;';
+    note.textContent = tl.note;
+    wrap.appendChild(note);
+  }
+  card.appendChild(wrap);
+}
+
+// ===== IMAGE PRELOADER =====
+function preloadAllImages() {
+  Object.values(IMG).forEach(url => { const i = new Image(); i.src = url; });
+}
+
+// ===== HYDROGEN FUEL GAUGE RENDERER =====
+function renderFuelGauge(card, nodeId) {
+  const fuel = H_FUEL[nodeId];
+  if (!fuel) return;
+  const pct = fuel.pct;
+  const color = pct > 60 ? '#4ade80' : pct > 25 ? '#f4c430' : pct > 5 ? '#f97316' : '#f87171';
+  const gauge = document.createElement('div');
+  gauge.className = 'fuel-gauge';
+  gauge.innerHTML = `
+    <span class="fuel-icon">⛽</span>
+    <span class="fuel-label">H Fuel</span>
+    <div class="fuel-bar-wrap"><div class="fuel-bar-fill" style="width:${pct}%;background:${color};"></div></div>
+    <span class="fuel-pct" style="color:${color}">${pct}%</span>
+  `;
+  const sub = document.createElement('div');
+  sub.style.cssText = 'font-size:0.7rem;color:var(--text-muted);font-style:italic;margin-top:3px;padding:0 2px;';
+  sub.textContent = fuel.label;
+  // Insert before story text (at top of card, after title)
+  card.appendChild(gauge);
+}
+
+// ===== MASS BANNER RENDERER =====
+function renderMassBanner(container, nodeId) {
+  const data = MASS_LABELS[nodeId];
+  if (!data) return;
+  const banner = document.createElement('div');
+  banner.style.cssText = 'display:flex;align-items:center;gap:10px;padding:8px 16px;background:rgba(244,196,48,0.07);border-bottom:2px solid rgba(244,196,48,0.2);font-size:0.78rem;color:var(--text-muted);';
+  banner.innerHTML = `<span style="font-size:1.1rem">${data.emoji}</span><span><strong style="color:var(--gold);font-family:Cinzel,serif">${data.label}</strong> &mdash; ${data.desc}</span>`;
+  container.appendChild(banner);
+}
+
+// ===== GRAVITY / FUSION DIAGRAM RENDERER =====
+function renderGravityDiagram(card, nodeId) {
+  const gs = GRAVITY_STATES[nodeId];
+  if (!gs) return;
+  const wrap = document.createElement('div');
+  wrap.className = 'gf-diagram';
+  const eyebrow = document.createElement('div');
+  eyebrow.className = 'gf-eyebrow';
+  eyebrow.textContent = '⚖️ The Gravity vs. Fusion Balance Right Now';
+  wrap.appendChild(eyebrow);
+
+  const gLen = gs.gIn * 14;
+  const fLen = gs.fOut * 14;
+  const gColor = '#d946a8';
+  const fColor = '#f4c430';
+  const size = 60;
+
+  const svg = `<svg width="280" height="140" viewBox="0 0 280 140" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="starGrad" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="${gs.fOut === 0 ? '#333' : '#ffe066'}" stop-opacity="1"/>
+        <stop offset="100%" stop-color="${gs.fOut === 0 ? '#111' : '#f4a430'}" stop-opacity="0.7"/>
+      </radialGradient>
+    </defs>
+    <!-- GRAVITY arrows (pointing IN from left/right) -->
+    ${gLen > 0 ? `<line x1="${140 - size/2 - gLen}" y1="70" x2="${140 - size/2 - 4}" y2="70" stroke="${gColor}" stroke-width="3.5" stroke-linecap="round"/>
+    <polygon points="${140-size/2-4},70 ${140-size/2-14},64 ${140-size/2-14},76" fill="${gColor}"/>
+    <line x1="${140 + size/2 + gLen}" y1="70" x2="${140 + size/2 + 4}" y2="70" stroke="${gColor}" stroke-width="3.5" stroke-linecap="round"/>
+    <polygon points="${140+size/2+4},70 ${140+size/2+14},64 ${140+size/2+14},76" fill="${gColor}"/>
+    <text x="${140 - size/2 - gLen/2 - 10}" y="62" fill="${gColor}" font-size="9" font-family="sans-serif" text-anchor="middle">GRAVITY</text>
+    <text x="${140 + size/2 + gLen/2 + 10}" y="62" fill="${gColor}" font-size="9" font-family="sans-serif" text-anchor="middle">GRAVITY</text>` : ''}
+    <!-- FUSION arrows (pointing OUT) -->
+    ${fLen > 0 ? `<line x1="${140 - size/2 - 2}" y1="70" x2="${140 - size/2 - fLen - 2}" y2="70" stroke="${fColor}" stroke-width="3" stroke-linecap="round" stroke-dasharray="5,3"/>
+    <polygon points="${140-size/2-fLen-2},70 ${140-size/2-fLen+8},64 ${140-size/2-fLen+8},76" fill="${fColor}"/>
+    <line x1="${140 + size/2 + 2}" y1="70" x2="${140 + size/2 + fLen + 2}" y2="70" stroke="${fColor}" stroke-width="3" stroke-linecap="round" stroke-dasharray="5,3"/>
+    <polygon points="${140+size/2+fLen+2},70 ${140+size/2+fLen-8},64 ${140+size/2+fLen-8},76" fill="${fColor}"/>
+    <text x="${140 - size/2 - fLen/2 - 10}" y="84" fill="${fColor}" font-size="9" font-family="sans-serif" text-anchor="middle">FUSION</text>
+    <text x="${140 + size/2 + fLen/2 + 10}" y="84" fill="${fColor}" font-size="9" font-family="sans-serif" text-anchor="middle">FUSION</text>` : ''}
+    <!-- Star circle -->
+    <circle cx="140" cy="70" r="${size/2}" fill="url(#starGrad)" stroke="${gs.fOut === 0 ? '#333' : '#ffe066'}" stroke-width="1.5"/>
+    <text x="140" y="74" fill="${gs.fOut === 0 ? '#666' : '#0a0e27'}" font-size="9" font-family="sans-serif" text-anchor="middle" font-weight="bold">${gs.fOut === 0 ? 'BLACK' : 'YOU'}</text>
+  </svg>`;
+  wrap.innerHTML += svg;
+
+  const label = document.createElement('div');
+  label.className = `gf-label ${gs.state}`;
+  label.textContent = gs.label;
+  wrap.appendChild(label);
+  card.appendChild(wrap);
+}
+
+// ===== SIZE COMPARISON RENDERER (START_NEBULA only) =====
+function renderSizeComparison(card) {
+  const wrap = document.createElement('div');
+  wrap.className = 'size-compare';
+  const title = document.createElement('div');
+  title.className = 'size-compare-title';
+  title.textContent = '🔭 What you could become — compared to our Sun';
+  wrap.appendChild(title);
+
+  const row = document.createElement('div');
+  row.className = 'size-compare-row';
+
+  const stars = [
+    { r: 14, color: '#8b5e3c', glow: '#8b5e3c', name: 'Brown Dwarf', mass: '< 0.08 Suns', desc: 'Choice B (if you fall short)' },
+    { r: 28, color: '#ffe066', glow: '#f4a430', name: 'Sun-like Star', mass: '~ 1 Sun', desc: 'Choice B (if you just make it)' },
+    { r: 52, color: '#8eceff', glow: '#4ac1e0', name: 'Blue Supergiant', mass: '20+ Suns', desc: 'Choice A' },
+    { r: 80, color: '#ff8c66', glow: '#d946a8', name: 'Hypergiant', mass: '100+ Suns', desc: 'Choice A (extreme)' },
+  ];
+
+  stars.forEach(s => {
+    const starDiv = document.createElement('div');
+    starDiv.className = 'size-star';
+    const circle = document.createElement('div');
+    circle.className = 'size-circle';
+    const diam = s.r * 2;
+    circle.style.cssText = `width:${diam}px;height:${diam}px;background:radial-gradient(circle at 35% 35%, white, ${s.color});box-shadow:0 0 ${s.r*0.6}px ${s.glow};`;
+    starDiv.appendChild(circle);
+    const name = document.createElement('div');
+    name.className = 'size-name';
+    name.style.color = s.color;
+    name.textContent = s.name;
+    starDiv.appendChild(name);
+    const mass = document.createElement('div');
+    mass.className = 'size-mass';
+    mass.textContent = s.mass;
+    starDiv.appendChild(mass);
+    row.appendChild(starDiv);
+  });
+
+  wrap.appendChild(row);
+  const caption = document.createElement('p');
+  caption.style.cssText = 'font-size:0.72rem;color:var(--text-muted);text-align:center;margin-top:8px;font-style:italic;';
+  caption.textContent = 'All drawn to scale relative to each other. The Sun is the second from left.';
+  wrap.appendChild(caption);
+  card.appendChild(wrap);
+}
+
+// ===== ELEMENT FUSION LADDER (SUPERGIANT_AGE only) =====
+function renderElementLadder(card) {
+  const wrap = document.createElement('div');
+  wrap.className = 'element-ladder';
+  const title = document.createElement('div');
+  title.className = 'element-ladder-title';
+  title.textContent = '⚛️ Your Fusion History — Elements You\'ve Already Made';
+  wrap.appendChild(title);
+
+  const rows = [
+    { symbol: 'H', name: 'Hydrogen → Helium', time: 'Millions of years', done: true },
+    { symbol: 'He', name: 'Helium → Carbon', time: 'Thousands of years', done: true },
+    { symbol: 'C', name: 'Carbon → Oxygen', time: 'Hundreds of years', done: true },
+    { symbol: 'O', name: 'Oxygen → Silicon', time: 'Months', done: true },
+    { symbol: 'Si', name: 'Silicon → Iron', time: 'One day', done: true },
+    { symbol: 'Fe', name: 'IRON — cannot fuse! Gravity WINS.', time: '< 1 second', done: false },
+  ];
+
+  rows.forEach(r => {
+    const row = document.createElement('div');
+    row.className = `element-row ${r.done ? 'done' : 'danger'}`;
+    row.innerHTML = `<span class="element-symbol">${r.symbol}</span><span class="element-desc">${r.done ? '✓ ' : '✗ '}${r.name}</span><span class="element-time">${r.time}</span>`;
+    wrap.appendChild(row);
+  });
+
+  const note = document.createElement('p');
+  note.style.cssText = 'font-size:0.75rem;color:var(--text-muted);margin-top:10px;font-style:italic;padding:0 4px;line-height:1.5;';
+  note.innerHTML = 'Each stage releases <em>less</em> energy and burns out <em>faster</em>. Iron is the end of the road — fusing iron <strong>absorbs</strong> energy instead of releasing it. The moment your core goes iron, fusion stops and gravity collapses you in under a second.';
+  wrap.appendChild(note);
+  card.appendChild(wrap);
+}
+
+// ===== QUIZ GATE RENDERER =====
+function renderQuizGate(card, nodeId, onPass) {
+  const quiz = QUIZZES[nodeId];
+  if (!quiz) { onPass(); return; }
+  if (window._quizPassed[nodeId]) { onPass(); return; }
+
+  // Locked choices placeholder
+  const locked = document.createElement('div');
+  locked.className = 'choices-locked';
+  locked.textContent = '🔒 Answer the question below to unlock your choices';
+  card.appendChild(locked);
+
+  const gate = document.createElement('div');
+  gate.className = 'quiz-gate';
+  const prompt = document.createElement('div');
+  prompt.className = 'quiz-prompt';
+  prompt.textContent = '❓ Quick check — read carefully before you choose:';
+  gate.appendChild(prompt);
+  const q = document.createElement('div');
+  q.className = 'quiz-question';
+  q.textContent = quiz.q;
+  gate.appendChild(q);
+
+  const opts = document.createElement('div');
+  opts.className = 'quiz-options';
+
+  quiz.options.forEach((text, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-opt';
+    btn.textContent = text;
+    btn.addEventListener('click', () => {
+      // Disable all options
+      opts.querySelectorAll('.quiz-opt').forEach(b => b.classList.add('disabled'));
+      const feedback = document.createElement('div');
+      if (i === quiz.correct) {
+        btn.classList.add('correct');
+        feedback.className = 'quiz-feedback correct';
+        feedback.textContent = '✓ Correct! Choices unlocked.';
+        gate.appendChild(feedback);
+        window._quizPassed[nodeId] = true;
+        setTimeout(() => {
+          locked.remove();
+          gate.remove();
+          onPass();
+        }, 900);
+      } else {
+        btn.classList.add('wrong');
+        feedback.className = 'quiz-feedback wrong';
+        feedback.innerHTML = `✗ Not quite. <em>Hint: ${quiz.hint}</em> — re-read and try again!`;
+        gate.appendChild(feedback);
+        setTimeout(() => {
+          opts.querySelectorAll('.quiz-opt').forEach(b => { b.classList.remove('disabled','wrong','correct'); });
+          feedback.remove();
+        }, 2200);
+      }
+    });
+    opts.appendChild(btn);
+  });
+
+  gate.appendChild(opts);
+  card.appendChild(gate);
+}
 
 // ===== REAL PHOTO STRIP RENDERER =====
 function renderRealStrip(card, id) {
@@ -1352,44 +1878,7 @@ function renderStart(container) {
   container.appendChild(div);
 }
 
-function renderNode(container, nodeId) {
-  const node = NODES[nodeId];
-  if (!node) { currentNodeId = 'START_NEBULA'; render(); return; }
-
-  renderCounterBar(container);
-
-  const scene = document.createElement('div');
-  scene.className = 'scene';
-
-  // Hero image
-  const heroWrap = document.createElement('div');
-  heroWrap.className = 'hero-image-wrap';
-  const heroImg = document.createElement('img');
-  heroImg.src = node.image;
-  heroImg.alt = node.title;
-  heroImg.loading = 'lazy';
-  heroImg.onerror = function() { this.src = IMG.pillars; };
-  heroWrap.appendChild(heroImg);
-  scene.appendChild(heroWrap);
-
-  // Card
-  const card = document.createElement('div');
-  card.className = 'scene-card';
-  if (node.isSupernova) card.id = 'supernova-card';
-
-  const titleEl = document.createElement('h2');
-  titleEl.className = 'scene-title';
-  titleEl.textContent = node.title;
-  card.appendChild(titleEl);
-
-  node.text.forEach(para => {
-    const p = document.createElement('p');
-    p.className = 'story-text';
-    p.innerHTML = para;
-    card.appendChild(p);
-  });
-
-  // Choices
+function buildChoices(card, node) {
   const choicesDiv = document.createElement('div');
   choicesDiv.className = 'choices';
   const letters = ['A', 'B', 'C', 'D'];
@@ -1423,6 +1912,58 @@ function renderNode(container, nodeId) {
     choicesDiv.appendChild(btn);
   });
   card.appendChild(choicesDiv);
+}
+
+function renderNode(container, nodeId) {
+  const node = NODES[nodeId];
+  if (!node) { currentNodeId = 'START_NEBULA'; render(); return; }
+
+  renderCounterBar(container);
+
+  const scene = document.createElement('div');
+  scene.className = 'scene';
+
+  // Mass path banner (shown on all nodes after the opening choice)
+  if (nodeId !== 'START_NEBULA') renderMassBanner(scene, nodeId);
+
+  // Hero image
+  const heroWrap = document.createElement('div');
+  heroWrap.className = 'hero-image-wrap';
+  const heroImg = document.createElement('img');
+  heroImg.src = node.image;
+  heroImg.alt = node.title;
+  heroImg.loading = 'lazy';
+  heroImg.onerror = function() { this.src = IMG.pillars; };
+  heroWrap.appendChild(heroImg);
+  scene.appendChild(heroWrap);
+
+  // Card
+  const card = document.createElement('div');
+  card.className = 'scene-card';
+  if (node.isSupernova) card.id = 'supernova-card';
+
+  const titleEl = document.createElement('h2');
+  titleEl.className = 'scene-title';
+  titleEl.textContent = node.title;
+  card.appendChild(titleEl);
+
+  // Hydrogen fuel gauge
+  renderFuelGauge(card, nodeId);
+
+  node.text.forEach(para => {
+    const p = document.createElement('p');
+    p.className = 'story-text';
+    p.innerHTML = para;
+    card.appendChild(p);
+  });
+
+  // Special inserts after text, before choices
+  if (nodeId === 'START_NEBULA') renderSizeComparison(card);
+  if (nodeId === 'SUPERGIANT_AGE') renderElementLadder(card);
+  renderGravityDiagram(card, nodeId);
+
+  // Comprehension quiz gate — choices only appear after correct answer
+  renderQuizGate(card, nodeId, () => buildChoices(card, node));
 
   // Concept tag
   if (node.concept) {
@@ -1491,6 +2032,9 @@ function renderEnding(container, endingId) {
     ct.innerHTML = `🔬 <strong>Concept:</strong> ${ending.concept}`;
     card.appendChild(ct);
   }
+
+  // Timeline
+  renderTimeline(card, endingId);
 
   // Real photo strip
   renderRealStrip(card, endingId);
@@ -1613,6 +2157,7 @@ function renderBadgeWall(container) {
 }
 
 // ===== INITIAL RENDER =====
+preloadAllImages();
 render();
 </script>
 </body>
